@@ -175,4 +175,44 @@ public static class Json
         using var reader = CreateReader(json, options);
         return reader.ReadArray();
     }
+
+    /// <summary>
+    /// Creates a <see cref="JsonWriter"/> that writes to a stream.
+    /// </summary>
+    /// <param name="stream">The stream to write to.</param>
+    /// <param name="options">Writer options. If null, default options are used.</param>
+    /// <returns>A new JSON writer.</returns>
+    public static JsonWriter CreateWriter(Stream stream, JsonWriterOptions? options = null)
+    {
+        return JsonWriter.Create(stream, options);
+    }
+
+    /// <summary>
+    /// Creates a <see cref="JsonWriter"/> that writes to a TextWriter.
+    /// </summary>
+    /// <param name="textWriter">The text writer to write to.</param>
+    /// <param name="options">Writer options. If null, default options are used.</param>
+    /// <returns>A new JSON writer.</returns>
+    public static JsonWriter CreateWriter(TextWriter textWriter, JsonWriterOptions? options = null)
+    {
+        return JsonWriter.Create(textWriter, options);
+    }
+
+    /// <summary>
+    /// Converts a JSON value to its string representation.
+    /// </summary>
+    /// <param name="value">The JSON value to convert.</param>
+    /// <param name="indented">Whether to use indented formatting.</param>
+    /// <returns>A JSON string representation.</returns>
+    public static string Stringify(JsonValue value, bool indented = false)
+    {
+        ArgumentNullException.ThrowIfNull(value);        
+        using var writer = new StringWriter();
+        var options = indented ? JsonWriterOptions.PrettyPrint : JsonWriterOptions.Default;
+        using (var jsonWriter = CreateWriter(writer, options))
+        {
+            jsonWriter.Write(value);
+        }
+        return writer.ToString();
+    }
 }
