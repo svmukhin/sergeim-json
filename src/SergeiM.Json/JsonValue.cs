@@ -1,8 +1,11 @@
+using System.Text.Json.Serialization;
+
 namespace SergeiM.Json;
 
 /// <summary>
 /// Represents an immutable JSON value. This is the base class for all JSON value types.
 /// </summary>
+[JsonConverter(typeof(JsonValueConverter))]
 public abstract class JsonValue
 {
     /// <summary>
