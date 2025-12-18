@@ -103,4 +103,76 @@ public static class Json
     {
         return value ? JsonValue.True : JsonValue.False;
     }
+
+    /// <summary>
+    /// Creates a <see cref="JsonReader"/> from a stream.
+    /// </summary>
+    /// <param name="stream">The stream to read from.</param>
+    /// <param name="options">Reader options. If null, default options are used.</param>
+    /// <returns>A new JSON reader.</returns>
+    public static JsonReader CreateReader(Stream stream, JsonReaderOptions? options = null)
+    {
+        return JsonReader.Create(stream, options);
+    }
+
+    /// <summary>
+    /// Creates a <see cref="JsonReader"/> from a TextReader.
+    /// </summary>
+    /// <param name="textReader">The text reader to read from.</param>
+    /// <param name="options">Reader options. If null, default options are used.</param>
+    /// <returns>A new JSON reader.</returns>
+    public static JsonReader CreateReader(TextReader textReader, JsonReaderOptions? options = null)
+    {
+        return JsonReader.Create(textReader, options);
+    }
+
+    /// <summary>
+    /// Creates a <see cref="JsonReader"/> from a string.
+    /// </summary>
+    /// <param name="json">The JSON string to parse.</param>
+    /// <param name="options">Reader options. If null, default options are used.</param>
+    /// <returns>A new JSON reader.</returns>
+    public static JsonReader CreateReader(string json, JsonReaderOptions? options = null)
+    {
+        return JsonReader.Create(new StringReader(json), options);
+    }
+
+    /// <summary>
+    /// Parses a JSON string and returns a <see cref="JsonValue"/>.
+    /// </summary>
+    /// <param name="json">The JSON string to parse.</param>
+    /// <param name="options">Reader options. If null, default options are used.</param>
+    /// <returns>The parsed JSON value.</returns>
+    /// <exception cref="JsonException">If the JSON is invalid.</exception>
+    public static JsonValue Parse(string json, JsonReaderOptions? options = null)
+    {
+        using var reader = CreateReader(json, options);
+        return reader.Read();
+    }
+
+    /// <summary>
+    /// Parses a JSON string and returns a <see cref="JsonObject"/>.
+    /// </summary>
+    /// <param name="json">The JSON string to parse.</param>
+    /// <param name="options">Reader options. If null, default options are used.</param>
+    /// <returns>The parsed JSON object.</returns>
+    /// <exception cref="JsonException">If the JSON is invalid or not an object.</exception>
+    public static JsonObject ParseObject(string json, JsonReaderOptions? options = null)
+    {
+        using var reader = CreateReader(json, options);
+        return reader.ReadObject();
+    }
+
+    /// <summary>
+    /// Parses a JSON string and returns a <see cref="JsonArray"/>.
+    /// </summary>
+    /// <param name="json">The JSON string to parse.</param>
+    /// <param name="options">Reader options. If null, default options are used.</param>
+    /// <returns>The parsed JSON array.</returns>
+    /// <exception cref="JsonException">If the JSON is invalid or not an array.</exception>
+    public static JsonArray ParseArray(string json, JsonReaderOptions? options = null)
+    {
+        using var reader = CreateReader(json, options);
+        return reader.ReadArray();
+    }
 }
