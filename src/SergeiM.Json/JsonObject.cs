@@ -22,6 +22,12 @@ public sealed class JsonObject : JsonValue, IReadOnlyDictionary<string, JsonValu
     }
 
     /// <summary>
+    /// Converts this JSON object to an <see cref="ImmutableDictionary{TKey, TValue}"/>.
+    /// </summary>
+    /// <returns>An immutable dictionary containing all properties.</returns>
+    internal ImmutableDictionary<string, JsonValue> ToImmutableDictionary() => _properties;
+
+    /// <summary>
     /// Gets the type of this JSON value.
     /// </summary>
     public override JsonValueType ValueType => JsonValueType.Object;
