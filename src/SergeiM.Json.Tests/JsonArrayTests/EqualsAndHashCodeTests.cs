@@ -1,4 +1,4 @@
-namespace SergeiM.Json.Tests;
+namespace SergeiM.Json.Tests.JsonArrayTests;
 
 [TestClass]
 public class EqualsAndHashCodeTests
