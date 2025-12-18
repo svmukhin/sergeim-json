@@ -52,7 +52,7 @@ public sealed class JsonPointer
         for (int i = 0; i < _tokens.Length; i++)
         {
             var token = _tokens[i];
-            
+
             if (current is JsonObject obj)
             {
                 if (!obj.ContainsKey(token))
@@ -137,7 +137,7 @@ public sealed class JsonPointer
         if (string.IsNullOrEmpty(pointer))
             return Array.Empty<string>();
         var parts = pointer.Substring(1).Split('/'); // Remove leading '/'
-        var tokens = new string[parts.Length];        
+        var tokens = new string[parts.Length];
         for (int i = 0; i < parts.Length; i++)
         {
             tokens[i] = UnescapeToken(parts[i]);
@@ -170,7 +170,7 @@ public sealed class JsonPointer
     private string GetPointerUpTo(int tokenIndex)
     {
         if (tokenIndex == 0)
-            return "";        
+            return "";
         return "/" + string.Join("/", _tokens.Take(tokenIndex).Select(EscapeToken));
     }
 

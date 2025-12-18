@@ -79,9 +79,9 @@ public sealed class JsonObject : JsonValue, IReadOnlyDictionary<string, JsonValu
     public JsonArray? GetJsonArray(string name)
     {
         if (!_properties.TryGetValue(name, out var value))
-            return null;        
+            return null;
         if (value is JsonArray jsonArray)
-            return jsonArray;        
+            return jsonArray;
         throw new InvalidCastException($"Property '{name}' is of type {value.ValueType}, not Array");
     }
 
@@ -94,9 +94,9 @@ public sealed class JsonObject : JsonValue, IReadOnlyDictionary<string, JsonValu
     public JsonObject? GetJsonObject(string name)
     {
         if (!_properties.TryGetValue(name, out var value))
-            return null;        
+            return null;
         if (value is JsonObject jsonObject)
-            return jsonObject;        
+            return jsonObject;
         throw new InvalidCastException($"Property '{name}' is of type {value.ValueType}, not Object");
     }
 
@@ -109,9 +109,9 @@ public sealed class JsonObject : JsonValue, IReadOnlyDictionary<string, JsonValu
     public JsonNumber? GetJsonNumber(string name)
     {
         if (!_properties.TryGetValue(name, out var value))
-            return null;        
+            return null;
         if (value is JsonNumber jsonNumber)
-            return jsonNumber;        
+            return jsonNumber;
         throw new InvalidCastException($"Property '{name}' is of type {value.ValueType}, not Number");
     }
 
@@ -124,9 +124,9 @@ public sealed class JsonObject : JsonValue, IReadOnlyDictionary<string, JsonValu
     public JsonString? GetJsonString(string name)
     {
         if (!_properties.TryGetValue(name, out var value))
-            return null;        
+            return null;
         if (value is JsonString jsonString)
-            return jsonString;        
+            return jsonString;
         throw new InvalidCastException($"Property '{name}' is of type {value.ValueType}, not String");
     }
 
@@ -252,9 +252,9 @@ public sealed class JsonObject : JsonValue, IReadOnlyDictionary<string, JsonValu
     public bool GetBoolean(string name)
     {
         if (!_properties.TryGetValue(name, out var value))
-            throw new KeyNotFoundException($"Property '{name}' not found");        
+            throw new KeyNotFoundException($"Property '{name}' not found");
         if (value is JsonBoolean jsonBoolean)
-            return jsonBoolean.Value;        
+            return jsonBoolean.Value;
         throw new InvalidCastException($"Property '{name}' is of type {value.ValueType}, not Boolean");
     }
 
@@ -267,9 +267,9 @@ public sealed class JsonObject : JsonValue, IReadOnlyDictionary<string, JsonValu
     public bool GetBoolean(string name, bool defaultValue)
     {
         if (!_properties.TryGetValue(name, out var value))
-            return defaultValue;        
+            return defaultValue;
         if (value is JsonBoolean jsonBoolean)
-            return jsonBoolean.Value;        
+            return jsonBoolean.Value;
         return defaultValue;
     }
 
@@ -282,7 +282,7 @@ public sealed class JsonObject : JsonValue, IReadOnlyDictionary<string, JsonValu
     public bool IsNull(string name)
     {
         if (!_properties.TryGetValue(name, out var value))
-            throw new KeyNotFoundException($"Property '{name}' not found");        
+            throw new KeyNotFoundException($"Property '{name}' not found");
         return value is JsonNull;
     }
 
@@ -302,7 +302,7 @@ public sealed class JsonObject : JsonValue, IReadOnlyDictionary<string, JsonValu
     {
         if (Count == 0)
             return "{}";
-        var items = _properties.Select(kvp => 
+        var items = _properties.Select(kvp =>
             $"{System.Text.Json.JsonSerializer.Serialize(kvp.Key)}:{kvp.Value.ToString()}");
         return "{" + string.Join(",", items) + "}";
     }

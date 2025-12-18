@@ -49,7 +49,7 @@ public sealed class JsonArray : JsonValue, IReadOnlyList<JsonValue>
     {
         var value = _values[index];
         if (value is JsonArray jsonArray)
-            return jsonArray;        
+            return jsonArray;
         throw new InvalidCastException($"Element at index {index} is of type {value.ValueType}, not Array");
     }
 
@@ -63,7 +63,7 @@ public sealed class JsonArray : JsonValue, IReadOnlyList<JsonValue>
     {
         var value = _values[index];
         if (value is JsonObject jsonObject)
-            return jsonObject;        
+            return jsonObject;
         throw new InvalidCastException($"Element at index {index} is of type {value.ValueType}, not Object");
     }
 
@@ -77,7 +77,7 @@ public sealed class JsonArray : JsonValue, IReadOnlyList<JsonValue>
     {
         var value = _values[index];
         if (value is JsonNumber jsonNumber)
-            return jsonNumber;        
+            return jsonNumber;
         throw new InvalidCastException($"Element at index {index} is of type {value.ValueType}, not Number");
     }
 
@@ -91,7 +91,7 @@ public sealed class JsonArray : JsonValue, IReadOnlyList<JsonValue>
     {
         var value = _values[index];
         if (value is JsonString jsonString)
-            return jsonString;        
+            return jsonString;
         throw new InvalidCastException($"Element at index {index} is of type {value.ValueType}, not String");
     }
 
@@ -141,7 +141,7 @@ public sealed class JsonArray : JsonValue, IReadOnlyList<JsonValue>
     {
         var value = _values[index];
         if (value is JsonBoolean jsonBoolean)
-            return jsonBoolean.Value;        
+            return jsonBoolean.Value;
         throw new InvalidCastException($"Element at index {index} is of type {value.ValueType}, not Boolean");
     }
 

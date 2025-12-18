@@ -209,7 +209,7 @@ public static class Json
     /// <returns>A JSON string representation.</returns>
     public static string Stringify(JsonValue value, bool indented = false)
     {
-        ArgumentNullException.ThrowIfNull(value);        
+        ArgumentNullException.ThrowIfNull(value);
         using var writer = new StringWriter();
         var options = indented ? JsonWriterOptions.PrettyPrint : JsonWriterOptions.Default;
         using (var jsonWriter = CreateWriter(writer, options))

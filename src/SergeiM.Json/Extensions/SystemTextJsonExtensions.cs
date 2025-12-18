@@ -46,7 +46,7 @@ public static class SystemTextJsonExtensions
     /// <returns>A JSON element.</returns>
     public static JsonElement ToJsonElement(this JsonValue value)
     {
-        ArgumentNullException.ThrowIfNull(value);        
+        ArgumentNullException.ThrowIfNull(value);
         var json = value.ToString();
         using var document = JsonDocument.Parse(json);
         return document.RootElement.Clone();
@@ -59,7 +59,7 @@ public static class SystemTextJsonExtensions
     /// <returns>A JSON document. The caller is responsible for disposing it.</returns>
     public static JsonDocument ToJsonDocument(this JsonValue value)
     {
-        ArgumentNullException.ThrowIfNull(value);        
+        ArgumentNullException.ThrowIfNull(value);
         var json = value.ToString();
         return JsonDocument.Parse(json);
     }
@@ -106,7 +106,7 @@ public static class SystemTextJsonExtensions
 
     private static JsonObject ToJsonObject(JsonElement element)
     {
-        var builder = ImmutableDictionary.CreateBuilder<string, JsonValue>();        
+        var builder = ImmutableDictionary.CreateBuilder<string, JsonValue>();
         foreach (var property in element.EnumerateObject())
         {
             builder[property.Name] = property.Value.ToJsonValue();
@@ -116,7 +116,7 @@ public static class SystemTextJsonExtensions
 
     private static JsonArray ToJsonArray(JsonElement element)
     {
-        var builder = ImmutableArray.CreateBuilder<JsonValue>();        
+        var builder = ImmutableArray.CreateBuilder<JsonValue>();
         foreach (var item in element.EnumerateArray())
         {
             builder.Add(item.ToJsonValue());
@@ -127,11 +127,11 @@ public static class SystemTextJsonExtensions
     private static JsonNumber ToJsonNumber(JsonElement element)
     {
         if (element.TryGetInt32(out var intValue))
-            return new JsonNumber(intValue);        
+            return new JsonNumber(intValue);
         if (element.TryGetInt64(out var longValue))
-            return new JsonNumber(longValue);        
+            return new JsonNumber(longValue);
         if (element.TryGetDecimal(out var decimalValue))
-            return new JsonNumber(decimalValue);        
+            return new JsonNumber(decimalValue);
         return new JsonNumber(element.GetDouble());
     }
 }

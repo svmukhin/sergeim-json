@@ -44,8 +44,8 @@ public static class JsonMergePatch
             }
             else
             {
-                if (targetObj.TryGetValue(key, out var targetValue) && 
-                    targetValue is JsonObject && 
+                if (targetObj.TryGetValue(key, out var targetValue) &&
+                    targetValue is JsonObject &&
                     patchValue is JsonObject)
                 {
                     builder.Add(key, Merge(targetValue, patchValue));

@@ -171,7 +171,7 @@ public sealed class JsonPatch
     private static JsonValue ApplyMove(JsonValue target, JsonPatchOperation operation)
     {
         var fromPointer = operation.From!;
-        var value = fromPointer.GetValue(target);        
+        var value = fromPointer.GetValue(target);
         var afterRemove = ApplyOperation(target, JsonPatchOperation.Remove(fromPointer));
         return ApplyOperation(afterRemove, JsonPatchOperation.Add(operation.Path, value));
     }
@@ -179,7 +179,7 @@ public sealed class JsonPatch
     private static JsonValue ApplyCopy(JsonValue target, JsonPatchOperation operation)
     {
         var fromPointer = operation.From!;
-        var value = fromPointer.GetValue(target);        
+        var value = fromPointer.GetValue(target);
         return ApplyOperation(target, JsonPatchOperation.Add(operation.Path, value));
     }
 
@@ -206,7 +206,7 @@ public sealed class JsonPatch
         {
             return modifier(target, tokens[0]);
         }
-        var parentPath = new JsonPointer("/" + string.Join("/", 
+        var parentPath = new JsonPointer("/" + string.Join("/",
             tokens.Take(tokens.Count - 1).Select(JsonPointer.EscapeToken)));
         var lastToken = tokens[tokens.Count - 1];
         return ModifyAtPath(target, parentPath, (parent, token) =>

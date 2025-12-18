@@ -221,7 +221,7 @@ public sealed class JsonWriter : IDisposable
         if (!_disposed)
         {
             _utf8JsonWriter?.Dispose();
-            _utf8JsonWriter = null;            
+            _utf8JsonWriter = null;
             // Note: We don't dispose the stream or textWriter as we don't own them
             // The caller is responsible for disposing the output target
             _disposed = true;

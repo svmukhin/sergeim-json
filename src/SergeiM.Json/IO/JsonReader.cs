@@ -57,7 +57,7 @@ public sealed class JsonReader : IDisposable
     {
         var value = Read();
         if (value is JsonObject jsonObject)
-            return jsonObject;        
+            return jsonObject;
         throw new JsonException($"Expected JSON object but found {value.ValueType}");
     }
 
@@ -70,7 +70,7 @@ public sealed class JsonReader : IDisposable
     {
         var value = Read();
         if (value is JsonArray jsonArray)
-            return jsonArray;        
+            return jsonArray;
         throw new JsonException($"Expected JSON array but found {value.ValueType}");
     }
 
@@ -100,8 +100,8 @@ public sealed class JsonReader : IDisposable
             var readerOptions = new JsonDocumentOptions
             {
                 AllowTrailingCommas = _options.AllowTrailingCommas,
-                CommentHandling = _options.AllowComments 
-                    ? JsonCommentHandling.Skip 
+                CommentHandling = _options.AllowComments
+                    ? JsonCommentHandling.Skip
                     : JsonCommentHandling.Disallow,
                 MaxDepth = _options.MaxDepth
             };
@@ -131,7 +131,7 @@ public sealed class JsonReader : IDisposable
 
     private static JsonObject ParseObject(JsonElement element)
     {
-        var builder = ImmutableDictionary.CreateBuilder<string, JsonValue>();        
+        var builder = ImmutableDictionary.CreateBuilder<string, JsonValue>();
         foreach (var property in element.EnumerateObject())
         {
             builder[property.Name] = ParseElement(property.Value);
@@ -141,7 +141,7 @@ public sealed class JsonReader : IDisposable
 
     private static JsonArray ParseArray(JsonElement element)
     {
-        var builder = ImmutableArray.CreateBuilder<JsonValue>();        
+        var builder = ImmutableArray.CreateBuilder<JsonValue>();
         foreach (var item in element.EnumerateArray())
         {
             builder.Add(ParseElement(item));
@@ -152,11 +152,11 @@ public sealed class JsonReader : IDisposable
     private static JsonNumber ParseNumber(JsonElement element)
     {
         if (element.TryGetInt32(out var intValue))
-            return new JsonNumber(intValue);        
+            return new JsonNumber(intValue);
         if (element.TryGetInt64(out var longValue))
-            return new JsonNumber(longValue);        
+            return new JsonNumber(longValue);
         if (element.TryGetDecimal(out var decimalValue))
-            return new JsonNumber(decimalValue);        
+            return new JsonNumber(decimalValue);
         return new JsonNumber(element.GetDouble());
     }
 

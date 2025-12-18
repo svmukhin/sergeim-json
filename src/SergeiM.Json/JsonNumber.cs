@@ -100,7 +100,7 @@ public sealed class JsonNumber : JsonValue
     /// </summary>
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns>true if the specified object is a JsonNumber with the same value; otherwise, false.</returns>
-    public override bool Equals(object? obj) => 
+    public override bool Equals(object? obj) =>
         obj is JsonNumber other && _value == other._value;
 
     /// <summary>
