@@ -1,7 +1,7 @@
 using System.Collections.Immutable;
 using System.Text.Json;
 
-namespace SergeiM.Json;
+namespace SergeiM.Json.Extensions;
 
 /// <summary>
 /// Extension methods for integrating with System.Text.Json types.

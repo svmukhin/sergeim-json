@@ -1,4 +1,6 @@
-namespace SergeiM.Json;
+using SergeiM.Json.Patch;
+
+namespace SergeiM.Json.Extensions;
 
 /// <summary>
 /// Extension methods for JSON values providing additional formatting and utility methods.

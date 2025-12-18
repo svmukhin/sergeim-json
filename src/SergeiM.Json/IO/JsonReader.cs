@@ -1,7 +1,7 @@
 using System.Collections.Immutable;
 using System.Text.Json;
 
-namespace SergeiM.Json;
+namespace SergeiM.Json.IO;
 
 /// <summary>
 /// Reads JSON data and converts it to immutable <see cref="JsonValue"/> instances.

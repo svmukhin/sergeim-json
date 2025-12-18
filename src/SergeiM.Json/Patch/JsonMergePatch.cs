@@ -1,4 +1,4 @@
-namespace SergeiM.Json;
+namespace SergeiM.Json.Patch;
 
 /// <summary>
 /// Implements JSON Merge Patch (RFC 7386) for applying modifications to JSON objects.

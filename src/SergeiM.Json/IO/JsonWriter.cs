@@ -1,6 +1,6 @@
 using System.Text.Json;
 
-namespace SergeiM.Json;
+namespace SergeiM.Json.IO;
 
 /// <summary>
 /// Writes JSON values to an output stream or text writer.

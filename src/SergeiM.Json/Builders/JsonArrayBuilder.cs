@@ -1,6 +1,6 @@
 using System.Collections.Immutable;
 
-namespace SergeiM.Json;
+namespace SergeiM.Json.Builders;
 
 /// <summary>
 /// A builder for creating <see cref="JsonArray"/> instances.

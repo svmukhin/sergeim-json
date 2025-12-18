@@ -1,4 +1,4 @@
-namespace SergeiM.Json;
+namespace SergeiM.Json.IO;
 
 /// <summary>
 /// Options for configuring JSON reader behavior.

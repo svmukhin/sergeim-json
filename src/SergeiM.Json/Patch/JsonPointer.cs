@@ -1,4 +1,4 @@
-namespace SergeiM.Json;
+namespace SergeiM.Json.Patch;
 
 /// <summary>
 /// Implements JSON Pointer (RFC 6901) for navigating JSON structures.

@@ -1,7 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace SergeiM.Json;
+namespace SergeiM.Json.Extensions;
 
 /// <summary>
 /// JSON converter for <see cref="JsonValue"/> that integrates with System.Text.Json serialization.

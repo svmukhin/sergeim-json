@@ -1,4 +1,4 @@
-namespace SergeiM.Json;
+namespace SergeiM.Json.Patch;
 
 /// <summary>
 /// Represents a single operation in a JSON Patch (RFC 6902).

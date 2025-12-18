@@ -1,6 +1,6 @@
 using System.Collections.Immutable;
 
-namespace SergeiM.Json;
+namespace SergeiM.Json.Patch;
 
 /// <summary>
 /// Implements JSON Patch (RFC 6902) for applying modifications to JSON structures.
