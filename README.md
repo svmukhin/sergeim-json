@@ -1,5 +1,10 @@
 # SergeiM.Json
 
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/svmukhin/sergeim-json/build.yml)
+![NuGet](https://img.shields.io/nuget/v/SergeiM.Json?color=%230000FF)
+[![Hits-of-Code](https://hitsofcode.com/github/svmukhin/sergeim-json)](https://hitsofcode.com/github/svmukhin/sergeim-json/view)
+![GitHub License](https://img.shields.io/github/license/svmukhin/sergeim-json)
+
 Immutable JSON library for .NET inspired by Jakarta JSON API (JSR 374).
 This library provides a clean, fluent API for working with JSON data
 structures using immutable types.
