@@ -1,2 +1,37 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<Project Sdk="Microsoft.NET.Sdk" />
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <!-- Package Metadata -->
+        <PackageId>SergeiM.Json</PackageId>
+        <Title>SergeiM.Json</Title>
+        <Description>Immutable JSON library for .NET inspired by Jakarta JSON API (JSR 374). Provides fluent builders, JSON Pointer (RFC 6901), and JSON Patch (RFC 6902) support.</Description>
+        <Authors>Sergei Mukhin</Authors>
+        <Copyright>Copyright (c) 2025 Sergei Mukhin</Copyright>
+        <!-- Package Details -->
+        <PackageTags>json;immutable;builder;json-pointer;json-patch;rfc6901;rfc6902</PackageTags>
+        <PackageProjectUrl>https://github.com/svmukhin/sergeim-json</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/svmukhin/sergeim-json</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <!-- Release Notes -->
+        <PackageReleaseNotes>See release notes at: https://github.com/svmukhin/sergeim-json/releases/tag/$(VersionPrefix)</PackageReleaseNotes>
+        <!-- Source Link -->
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <!-- Documentation -->
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="..\..\README.md"
+              Pack="true"
+              PackagePath="\" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.SourceLink.GitHub"
+                          PrivateAssets="All" />
+    </ItemGroup>
+</Project>
