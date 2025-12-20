@@ -1,3 +1,6 @@
+// SPDX-FileCopyrightText: Copyright (c) [2025] [Sergei Mukhin]
+// SPDX-License-Identifier: MIT
+
 using SergeiM.Json.IO;
 
 namespace SergeiM.Json.Tests.JsonWriterTests;
