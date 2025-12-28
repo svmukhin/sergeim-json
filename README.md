@@ -12,13 +12,13 @@ structures using immutable types.
 ## Features
 
 - **Immutable JSON Types**: All JSON values (objects, arrays, strings, numbers,
-booleans, null) are immutable
+  booleans, null) are immutable
 - **Builder Pattern**: Fluent API for constructing JSON objects and arrays
 - **Type-Safe Accessors**: Strongly-typed methods for accessing JSON values with
-optional defaults
+  optional defaults
 - **JSON Pointer (RFC 6901)**: Navigate JSON structures using JSON Pointer syntax
 - **JSON Patch (RFC 6902)**: Apply modifications to JSON documents with Add,
-Remove, Replace, Move, Copy, and Test operations
+  Remove, Replace, Move, Copy, and Test operations
 - **Stream-Based I/O**: Efficient reading and writing of JSON from/to streams
 - **Modern .NET**: Built for .NET 8+ with full nullable reference type support
 
@@ -192,11 +192,14 @@ var copyPatch = new JsonPatch(
 
 - **`JsonReader`**: Read JSON from streams or TextReader
 - **`JsonWriter`**: Write JSON to streams or TextWriter
-- **`JsonReaderOptions`**: Configuration for JSON parsing (comments, trailing commas)
-- **`JsonWriterOptions`**: Configuration for JSON output (indentation, formatting, Unicode escaping)
+- **`JsonReaderOptions`**: Configuration for JSON parsing (comments,
+  trailing commas)
+- **`JsonWriterOptions`**: Configuration for JSON output (indentation,
+  formatting, Unicode escaping)
   - `Default`: Compact output with Unicode escaping
   - `PrettyPrint`: Indented output with Unicode escaping
-  - `UnicodeUnescaped`: Compact output without Unicode escaping (for Cyrillic, Chinese, etc.)
+  - `UnicodeUnescaped`: Compact output without Unicode escaping (for Cyrillic,
+    Chinese, etc.)
   - `PrettyPrintUnicodeUnescaped`: Indented output without Unicode escaping
 
 ### JSON Pointer & Patch
@@ -204,7 +207,7 @@ var copyPatch = new JsonPatch(
 - **`JsonPointer`**: Navigate JSON structures using RFC 6901 pointer syntax
 - **`JsonPatch`**: Apply modifications using RFC 6902 patch operations
 - **`JsonPatchOperation`**: Individual patch operations (Add, Remove, Replace,
-Move, Copy, Test)
+  Move, Copy, Test)
 
 ## Type Conversions
 
@@ -240,7 +243,7 @@ Console.WriteLine(modified.ContainsKey("y"));     // true
 
 ```csharp
 // Accessing non-existent keys
-try 
+try
 {
     int value = obj.GetInt("missing");            // Throws KeyNotFoundException
 }
