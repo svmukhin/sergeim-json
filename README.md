@@ -98,6 +98,13 @@ string json = stringWriter.ToString();
 var options = new JsonWriterOptions { IndentOutput = true };
 var prettyWriter = JsonWriter.Create(new StringWriter(), options);
 prettyWriter.WriteObject(person);
+
+// Writing Unicode characters without escaping (Cyrillic, Chinese, etc.)
+var unicodeWriter = JsonWriter.Create(new StringWriter(), JsonWriterOptions.UnicodeUnescaped);
+unicodeWriter.Write(new JsonString("Привет мир")); // Writes: "Привет мир" (not "\u041F...")
+
+// Pretty print with Unicode
+var prettyUnicode = JsonWriter.Create(new StringWriter(), JsonWriterOptions.PrettyPrintUnicodeUnescaped);
 ```
 
 ### JSON Pointer (RFC 6901)
@@ -186,7 +193,11 @@ var copyPatch = new JsonPatch(
 - **`JsonReader`**: Read JSON from streams or TextReader
 - **`JsonWriter`**: Write JSON to streams or TextWriter
 - **`JsonReaderOptions`**: Configuration for JSON parsing (comments, trailing commas)
-- **`JsonWriterOptions`**: Configuration for JSON output (indentation, formatting)
+- **`JsonWriterOptions`**: Configuration for JSON output (indentation, formatting, Unicode escaping)
+  - `Default`: Compact output with Unicode escaping
+  - `PrettyPrint`: Indented output with Unicode escaping
+  - `UnicodeUnescaped`: Compact output without Unicode escaping (for Cyrillic, Chinese, etc.)
+  - `PrettyPrintUnicodeUnescaped`: Indented output without Unicode escaping
 
 ### JSON Pointer & Patch
 

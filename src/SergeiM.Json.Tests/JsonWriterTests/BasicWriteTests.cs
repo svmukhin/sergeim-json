@@ -75,4 +75,25 @@ public class BasicWriteTests
         var json = writer.ToString();
         Assert.AreEqual("null", json);
     }
+
+    [TestMethod]
+    public void Write_CyrillicString_WritesCorrectJson()
+    {
+        using var writer = new StringWriter();
+        using var jsonWriter = JsonWriter.Create(writer, JsonWriterOptions.UnicodeUnescaped);
+        jsonWriter.Write(new JsonString("Привет"));
+        var json = writer.ToString();
+        Assert.AreEqual("\"Привет\"", json);
+    }
+
+    [TestMethod]
+    public void Write_CyrillicString_DefaultEncoder_EscapesUnicode()
+    {
+        using var writer = new StringWriter();
+        using var jsonWriter = JsonWriter.Create(writer);
+        jsonWriter.Write(new JsonString("Привет"));
+        var json = writer.ToString();
+        Assert.AreEqual("\"\\u041F\\u0440\\u0438\\u0432\\u0435\\u0442\"", json);
+    }
 }
+

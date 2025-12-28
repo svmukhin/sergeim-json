@@ -41,4 +41,23 @@ public sealed class JsonWriterOptions
     /// Gets the default options with indented output.
     /// </summary>
     public static JsonWriterOptions PrettyPrint { get; } = new JsonWriterOptions { IndentOutput = true };
+
+    /// <summary>
+    /// Gets options that allow writing Unicode characters (including Cyrillic, Chinese, etc.) without escaping.
+    /// Uses UnsafeRelaxedJsonEscaping which does not escape most Unicode characters.
+    /// </summary>
+    public static JsonWriterOptions UnicodeUnescaped { get; } = new JsonWriterOptions
+    {
+        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+    };
+
+    /// <summary>
+    /// Gets options with indented output that allow writing Unicode characters without escaping.
+    /// Combines pretty printing with UnsafeRelaxedJsonEscaping.
+    /// </summary>
+    public static JsonWriterOptions PrettyPrintUnicodeUnescaped { get; } = new JsonWriterOptions
+    {
+        IndentOutput = true,
+        Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+    };
 }
