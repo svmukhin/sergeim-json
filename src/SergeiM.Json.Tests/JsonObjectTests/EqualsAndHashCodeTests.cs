@@ -9,11 +9,11 @@ public class EqualsAndHashCodeTests
     [TestMethod]
     public void Equals_WithSameContent_ReturnsTrue()
     {
-        var obj1 = Json.CreateObjectBuilder()
+        var obj1 = new JsonObjectBuilder()
             .Add("name", "Alice")
             .Add("age", 25)
             .Build();
-        var obj2 = Json.CreateObjectBuilder()
+        var obj2 = new JsonObjectBuilder()
             .Add("name", "Alice")
             .Add("age", 25)
             .Build();
@@ -24,10 +24,10 @@ public class EqualsAndHashCodeTests
     [TestMethod]
     public void Equals_WithDifferentContent_ReturnsFalse()
     {
-        var obj1 = Json.CreateObjectBuilder()
+        var obj1 = new JsonObjectBuilder()
             .Add("name", "Alice")
             .Build();
-        var obj2 = Json.CreateObjectBuilder()
+        var obj2 = new JsonObjectBuilder()
             .Add("name", "Bob")
             .Build();
         Assert.IsFalse(obj1.Equals(obj2));
@@ -36,10 +36,10 @@ public class EqualsAndHashCodeTests
     [TestMethod]
     public void Equals_WithDifferentKeys_ReturnsFalse()
     {
-        var obj1 = Json.CreateObjectBuilder()
+        var obj1 = new JsonObjectBuilder()
             .Add("name", "Alice")
             .Build();
-        var obj2 = Json.CreateObjectBuilder()
+        var obj2 = new JsonObjectBuilder()
             .Add("age", 25)
             .Build();
         Assert.IsFalse(obj1.Equals(obj2));
@@ -54,7 +54,7 @@ public class EqualsAndHashCodeTests
     [TestMethod]
     public void Equals_WithSameInstance_ReturnsTrue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 1)
             .Build();
         Assert.IsTrue(obj.Equals(obj));

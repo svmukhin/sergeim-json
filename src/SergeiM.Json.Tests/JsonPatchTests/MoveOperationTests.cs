@@ -11,7 +11,7 @@ public class MoveOperationTests
     [TestMethod]
     public void Move_Property_MovesValue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Add("y", 20)
             .Build();
@@ -24,7 +24,7 @@ public class MoveOperationTests
     [TestMethod]
     public void Move_ArrayElement_MovesElement()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add("a")
             .Add("b")
             .Add("c")
@@ -39,10 +39,10 @@ public class MoveOperationTests
     [TestMethod]
     public void Move_BetweenObjects_MovesValue()
     {
-        var obj = Json.CreateObjectBuilder()
-            .Add("source", Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
+            .Add("source", new JsonObjectBuilder()
                 .Add("value", 42))
-            .Add("target", Json.CreateObjectBuilder()
+            .Add("target", new JsonObjectBuilder()
                 .Add("other", 10))
             .Build();
         var result = (JsonObject)new JsonPatch(JsonPatchOperation.Move("/source/value", "/target/moved")).Apply(obj);

@@ -9,7 +9,7 @@ public class IndexerTests
     [TestMethod]
     public void Indexer_WithValidIndex_ReturnsValue()
     {
-        var value = Json.CreateArrayBuilder()
+        var value = new JsonArrayBuilder()
             .Add("test")
             .Build()[0];
         Assert.IsNotNull(value);
@@ -20,7 +20,7 @@ public class IndexerTests
     [ExpectedException(typeof(IndexOutOfRangeException))]
     public void Indexer_WithNegativeIndex_ThrowsIndexOutOfRangeException()
     {
-        var arr = Json.CreateArrayBuilder().Add(1).Build();
+        var arr = new JsonArrayBuilder().Add(1).Build();
         _ = arr[-1];
     }
 

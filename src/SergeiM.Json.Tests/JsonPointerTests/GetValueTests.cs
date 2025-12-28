@@ -11,7 +11,7 @@ public class GetValueTests
     [TestMethod]
     public void GetValue_EmptyPointer_ReturnsRoot()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Build();
         Assert.AreSame(obj, JsonPointer.Empty.GetValue(obj));
@@ -20,7 +20,7 @@ public class GetValueTests
     [TestMethod]
     public void GetValue_SimpleProperty_ReturnsValue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("name", "Alice")
             .Add("age", 30)
             .Build();
@@ -30,8 +30,8 @@ public class GetValueTests
     [TestMethod]
     public void GetValue_NestedProperty_ReturnsValue()
     {
-        var obj = Json.CreateObjectBuilder()
-            .Add("person", Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
+            .Add("person", new JsonObjectBuilder()
                 .Add("name", "Bob")
                 .Add("age", 25))
             .Build();
@@ -41,7 +41,7 @@ public class GetValueTests
     [TestMethod]
     public void GetValue_ArrayIndex_ReturnsElement()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add("first")
             .Add("second")
             .Add("third")
@@ -52,8 +52,8 @@ public class GetValueTests
     [TestMethod]
     public void GetValue_NestedArray_ReturnsElement()
     {
-        var obj = Json.CreateObjectBuilder()
-            .Add("items", Json.CreateArrayBuilder()
+        var obj = new JsonObjectBuilder()
+            .Add("items", new JsonArrayBuilder()
                 .Add(10)
                 .Add(20)
                 .Add(30))
@@ -65,7 +65,7 @@ public class GetValueTests
     [ExpectedException(typeof(JsonException))]
     public void GetValue_NonExistentProperty_ThrowsJsonException()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 1)
             .Build();
         new JsonPointer("/missing").GetValue(obj);
@@ -75,7 +75,7 @@ public class GetValueTests
     [ExpectedException(typeof(JsonException))]
     public void GetValue_InvalidArrayIndex_ThrowsJsonException()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add(1)
             .Build();
         new JsonPointer("/5").GetValue(arr);

@@ -9,7 +9,7 @@ public class EnumerationTests
     [TestMethod]
     public void GetEnumerator_IteratesAllElements()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add("a")
             .Add("b")
             .Add("c")
@@ -28,7 +28,7 @@ public class EnumerationTests
     [TestMethod]
     public void Count_ReturnsCorrectCount()
     {
-        Assert.AreEqual(3, Json.CreateArrayBuilder()
+        Assert.AreEqual(3, new JsonArrayBuilder()
             .Add(1)
             .Add(2)
             .Add(3)

@@ -9,7 +9,7 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void Build_EmptyBuilder_CreatesEmptyArray()
     {
-        var arr = Json.CreateArrayBuilder().Build();
+        var arr = new JsonArrayBuilder().Build();
         Assert.AreEqual(0, arr.Count);
         Assert.AreEqual(JsonValueType.Array, arr.ValueType);
     }
@@ -17,7 +17,7 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void Add_WithString_AddsStringValue()
     {
-        Assert.AreEqual("hello", Json.CreateArrayBuilder()
+        Assert.AreEqual("hello", new JsonArrayBuilder()
             .Add("hello")
             .Build().GetString(0));
     }
@@ -25,7 +25,7 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void Add_WithInt_AddsNumberValue()
     {
-        Assert.AreEqual(42, Json.CreateArrayBuilder()
+        Assert.AreEqual(42, new JsonArrayBuilder()
             .Add(42)
             .Build().GetInt(0));
     }
@@ -33,7 +33,7 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void Add_WithLong_AddsNumberValue()
     {
-        Assert.AreEqual(9999999999L, Json.CreateArrayBuilder()
+        Assert.AreEqual(9999999999L, new JsonArrayBuilder()
             .Add(9999999999L)
             .Build().GetLong(0));
     }
@@ -41,7 +41,7 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void Add_WithDouble_AddsNumberValue()
     {
-        Assert.AreEqual(2.71828, Json.CreateArrayBuilder()
+        Assert.AreEqual(2.71828, new JsonArrayBuilder()
             .Add(2.71828)
             .Build().GetDouble(0), 0.00001);
     }
@@ -49,7 +49,7 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void Add_WithDecimal_AddsNumberValue()
     {
-        Assert.AreEqual(9.99m, ((JsonNumber)Json.CreateArrayBuilder()
+        Assert.AreEqual(9.99m, ((JsonNumber)new JsonArrayBuilder()
             .Add(9.99m)
             .Build()[0]).DecimalValue());
     }
@@ -57,7 +57,7 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void Add_WithBoolean_AddsBooleanValue()
     {
-        Assert.IsFalse(Json.CreateArrayBuilder()
+        Assert.IsFalse(new JsonArrayBuilder()
             .Add(false)
             .Build().GetBoolean(0));
     }
@@ -65,7 +65,7 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void AddNull_AddsNullValue()
     {
-        Assert.IsTrue(Json.CreateArrayBuilder()
+        Assert.IsTrue(new JsonArrayBuilder()
             .AddNull()
             .Build().IsNull(0));
     }
@@ -73,8 +73,8 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void Add_WithJsonObject_AddsObjectValue()
     {
-        var result = Json.CreateArrayBuilder()
-            .Add(Json.CreateObjectBuilder().Add("key", "value").Build())
+        var result = new JsonArrayBuilder()
+            .Add(new JsonObjectBuilder().Add("key", "value").Build())
             .Build().GetJsonObject(0);
         Assert.AreEqual("value", result.GetString("key"));
     }
@@ -82,8 +82,8 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void Add_WithJsonArray_AddsArrayValue()
     {
-        var result = Json.CreateArrayBuilder()
-            .Add(Json.CreateArrayBuilder().Add(1).Build())
+        var result = new JsonArrayBuilder()
+            .Add(new JsonArrayBuilder().Add(1).Build())
             .Build().GetJsonArray(0);
         Assert.AreEqual(1, result.Count);
     }
@@ -91,8 +91,8 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void Add_WithJsonObjectBuilder_AddsObjectValue()
     {
-        var result = Json.CreateArrayBuilder()
-            .Add(Json.CreateObjectBuilder().Add("x", 5))
+        var result = new JsonArrayBuilder()
+            .Add(new JsonObjectBuilder().Add("x", 5))
             .Build().GetJsonObject(0);
         Assert.AreEqual(5, result.GetInt("x"));
     }
@@ -100,8 +100,8 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void Add_WithJsonArrayBuilder_AddsArrayValue()
     {
-        var result = Json.CreateArrayBuilder()
-            .Add(Json.CreateArrayBuilder().Add(7).Add(8))
+        var result = new JsonArrayBuilder()
+            .Add(new JsonArrayBuilder().Add(7).Add(8))
             .Build().GetJsonArray(0);
         Assert.AreEqual(2, result.Count);
         Assert.AreEqual(7, result.GetInt(0));
@@ -110,7 +110,7 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void Add_MultipleElements_AllAdded()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add(1)
             .Add(2)
             .Add(3)
@@ -125,7 +125,7 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void RemoveAt_ExistingIndex_RemovesElement()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add(1)
             .Add(2)
             .Add(3)
@@ -140,7 +140,7 @@ public class JsonArrayBuilderTests
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void RemoveAt_InvalidIndex_ThrowsArgumentOutOfRangeException()
     {
-        Json.CreateArrayBuilder()
+        new JsonArrayBuilder()
             .Add(1)
             .RemoveAt(5);
     }
@@ -148,7 +148,7 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void Build_MultipleTimes_CreatesIndependentArrays()
     {
-        var builder = Json.CreateArrayBuilder().Add(1);
+        var builder = new JsonArrayBuilder().Add(1);
         var arr1 = builder.Build();
         builder.Add(2);
         var arr2 = builder.Build();
@@ -159,11 +159,11 @@ public class JsonArrayBuilderTests
     [TestMethod]
     public void CreateArrayBuilder_WithExistingArray_CopiesElements()
     {
-        var original = Json.CreateArrayBuilder()
+        var original = new JsonArrayBuilder()
             .Add(1)
             .Add(2)
             .Build();
-        var modified = Json.CreateArrayBuilder(original)
+        var modified = new JsonArrayBuilder(original)
             .Add(3)
             .Build();
         Assert.AreEqual(2, original.Count);

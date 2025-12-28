@@ -23,7 +23,7 @@ public class WriteObjectTests
     {
         using var writer = new StringWriter();
         using var jsonWriter = JsonWriter.Create(writer);
-        jsonWriter.WriteObject(Json.CreateObjectBuilder()
+        jsonWriter.WriteObject(new JsonObjectBuilder()
             .Add("x", 10)
             .Add("y", 20)
             .Build());
@@ -35,8 +35,8 @@ public class WriteObjectTests
     [TestMethod]
     public void WriteObject_NestedObject_WritesNestedStructure()
     {
-        var obj = Json.CreateObjectBuilder()
-            .Add("outer", Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
+            .Add("outer", new JsonObjectBuilder()
                 .Add("inner", "value")
                 .Build())
             .Build();

@@ -13,7 +13,7 @@ public class FormattingTests
     {
         using var writer = new StringWriter();
         using var jsonWriter = JsonWriter.Create(writer, JsonWriterOptions.PrettyPrint);
-        jsonWriter.Write(Json.CreateObjectBuilder()
+        jsonWriter.Write(new JsonObjectBuilder()
             .Add("name", "Alice")
             .Add("age", 30)
             .Build());
@@ -27,7 +27,7 @@ public class FormattingTests
     {
         using var writer = new StringWriter();
         using var jsonWriter = JsonWriter.Create(writer);
-        jsonWriter.Write(Json.CreateObjectBuilder()
+        jsonWriter.Write(new JsonObjectBuilder()
             .Add("x", 1)
             .Add("y", 2)
             .Build());
@@ -44,7 +44,7 @@ public class FormattingTests
             IndentOutput = true,
             IndentString = "\t"
         });
-        jsonWriter.Write(Json.CreateObjectBuilder()
+        jsonWriter.Write(new JsonObjectBuilder()
             .Add("a", 1)
             .Build());
         var json = writer.ToString();

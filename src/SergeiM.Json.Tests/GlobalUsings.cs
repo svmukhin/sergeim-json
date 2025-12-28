@@ -2,3 +2,6 @@
 // SPDX-License-Identifier: MIT
 
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
+global using SergeiM.Json;
+global using SergeiM.Json.Builders;
+global using SergeiM.Json.IO;

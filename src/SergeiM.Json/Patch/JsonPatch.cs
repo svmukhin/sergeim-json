@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: MIT
 
 using System.Collections.Immutable;
+using SergeiM.Json.Builders;
 
 namespace SergeiM.Json.Patch;
 
@@ -78,20 +79,20 @@ public sealed class JsonPatch
         {
             if (parent is JsonObject obj)
             {
-                var builder = Json.CreateObjectBuilder(obj);
+                var builder = new JsonObjectBuilder(obj);
                 builder.Add(lastToken, value);
                 return builder.Build();
             }
             else if (parent is JsonArray arr)
             {
-                var builder = Json.CreateArrayBuilder(arr);
+                var builder = new JsonArrayBuilder(arr);
                 if (lastToken == "-")
                 {
                     builder.Add(value);
                 }
                 else if (int.TryParse(lastToken, out var index) && index >= 0 && index <= arr.Count)
                 {
-                    var newBuilder = Json.CreateArrayBuilder();
+                    var newBuilder = new JsonArrayBuilder();
                     for (int i = 0; i < index; i++)
                         newBuilder.Add(arr[i]);
                     newBuilder.Add(value);
@@ -120,7 +121,7 @@ public sealed class JsonPatch
             {
                 if (!obj.ContainsKey(lastToken))
                     throw new JsonException($"Property '{lastToken}' not found");
-                var builder = Json.CreateObjectBuilder(obj);
+                var builder = new JsonObjectBuilder(obj);
                 builder.Remove(lastToken);
                 return builder.Build();
             }
@@ -128,7 +129,7 @@ public sealed class JsonPatch
             {
                 if (!int.TryParse(lastToken, out var index) || index < 0 || index >= arr.Count)
                     throw new JsonException($"Invalid array index: {lastToken}");
-                var builder = Json.CreateArrayBuilder();
+                var builder = new JsonArrayBuilder();
                 for (int i = 0; i < arr.Count; i++)
                 {
                     if (i != index)
@@ -152,7 +153,7 @@ public sealed class JsonPatch
             {
                 if (!obj.ContainsKey(lastToken))
                     throw new JsonException($"Property '{lastToken}' not found");
-                var builder = Json.CreateObjectBuilder(obj);
+                var builder = new JsonObjectBuilder(obj);
                 builder.Add(lastToken, value);
                 return builder.Build();
             }
@@ -160,7 +161,7 @@ public sealed class JsonPatch
             {
                 if (!int.TryParse(lastToken, out var index) || index < 0 || index >= arr.Count)
                     throw new JsonException($"Invalid array index: {lastToken}");
-                var builder = Json.CreateArrayBuilder();
+                var builder = new JsonArrayBuilder();
                 for (int i = 0; i < arr.Count; i++)
                 {
                     builder.Add(i == index ? value : arr[i]);
@@ -234,7 +235,7 @@ public sealed class JsonPatch
             var modifiedChild = modifier(child, lastToken);
             if (parent is JsonObject parentObj)
             {
-                var builder = Json.CreateObjectBuilder(parentObj);
+                var builder = new JsonObjectBuilder(parentObj);
                 builder.Add(token, modifiedChild);
                 return builder.Build();
             }
@@ -242,7 +243,7 @@ public sealed class JsonPatch
             {
                 if (!int.TryParse(token, out var index))
                     throw new JsonException($"Invalid array index: {token}");
-                var builder = Json.CreateArrayBuilder();
+                var builder = new JsonArrayBuilder();
                 for (int i = 0; i < parentArr.Count; i++)
                 {
                     builder.Add(i == index ? modifiedChild : parentArr[i]);

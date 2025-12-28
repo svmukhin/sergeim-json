@@ -23,7 +23,7 @@ public class WriteArrayTests
     {
         using var writer = new StringWriter();
         using var jsonWriter = JsonWriter.Create(writer);
-        jsonWriter.WriteArray(Json.CreateArrayBuilder()
+        jsonWriter.WriteArray(new JsonArrayBuilder()
             .Add(1)
             .Add(2)
             .Add(3)
@@ -35,8 +35,8 @@ public class WriteArrayTests
     [TestMethod]
     public void WriteArray_NestedArray_WritesNestedStructure()
     {
-        var arr = Json.CreateArrayBuilder()
-            .Add(Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
+            .Add(new JsonArrayBuilder()
                 .Add(1)
                 .Add(2)
                 .Build())

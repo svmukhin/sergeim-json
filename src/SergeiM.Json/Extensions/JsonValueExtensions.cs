@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: Copyright (c) [2025] [Sergei Mukhin]
 // SPDX-License-Identifier: MIT
 
+using SergeiM.Json.IO;
 using SergeiM.Json.Patch;
 
 namespace SergeiM.Json.Extensions;
@@ -18,7 +19,7 @@ public static class JsonValueExtensions
     public static string ToJsonString(this JsonValue value)
     {
         ArgumentNullException.ThrowIfNull(value);
-        return Json.Stringify(value, indented: false);
+        return Stringify(value, indented: false);
     }
 
     /// <summary>
@@ -29,7 +30,25 @@ public static class JsonValueExtensions
     public static string ToIndentedJsonString(this JsonValue value)
     {
         ArgumentNullException.ThrowIfNull(value);
-        return Json.Stringify(value, indented: true);
+        return Stringify(value, indented: true);
+    }
+
+    /// <summary>
+    /// Converts a JSON value to its string representation.
+    /// </summary>
+    /// <param name="value">The JSON value to convert.</param>
+    /// <param name="indented">Whether to use indented formatting.</param>
+    /// <returns>A JSON string representation.</returns>
+    private static string Stringify(JsonValue value, bool indented = false)
+    {
+        ArgumentNullException.ThrowIfNull(value);
+        using var writer = new StringWriter();
+        var options = indented ? JsonWriterOptions.PrettyPrint : JsonWriterOptions.Default;
+        using (var jsonWriter = JsonWriter.Create(writer, options))
+        {
+            jsonWriter.Write(value);
+        }
+        return writer.ToString();
     }
 
     /// <summary>

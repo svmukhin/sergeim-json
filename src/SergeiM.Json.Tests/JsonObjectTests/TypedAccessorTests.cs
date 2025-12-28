@@ -8,15 +8,15 @@ public class TypedAccessorTests
 {
     private JsonObject CreateTestObject()
     {
-        return Json.CreateObjectBuilder()
+        return new JsonObjectBuilder()
             .Add("string", "hello")
             .Add("number", 123)
             .Add("boolean", true)
             .AddNull("null")
-            .Add("object", Json.CreateObjectBuilder()
+            .Add("object", new JsonObjectBuilder()
                 .Add("nested", "value")
                 .Build())
-            .Add("array", Json.CreateArrayBuilder()
+            .Add("array", new JsonArrayBuilder()
                 .Add(1)
                 .Add(2)
                 .Build())

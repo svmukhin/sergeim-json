@@ -11,7 +11,7 @@ public class CopyOperationTests
     [TestMethod]
     public void Copy_Property_CopiesValue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Build();
         var result = (JsonObject)new JsonPatch(JsonPatchOperation.Copy("/x", "/y")).Apply(obj);
@@ -22,7 +22,7 @@ public class CopyOperationTests
     [TestMethod]
     public void Copy_ArrayElement_CopiesElement()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add("a")
             .Add("b")
             .Build();
@@ -36,8 +36,8 @@ public class CopyOperationTests
     [TestMethod]
     public void Copy_NestedValue_CopiesValue()
     {
-        var obj = Json.CreateObjectBuilder()
-            .Add("data", Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
+            .Add("data", new JsonObjectBuilder()
                 .Add("value", 42))
             .Build();
         var result = (JsonObject)new JsonPatch(JsonPatchOperation.Copy("/data/value", "/copied")).Apply(obj);

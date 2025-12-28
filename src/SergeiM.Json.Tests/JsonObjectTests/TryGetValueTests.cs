@@ -9,7 +9,7 @@ public class TryGetValueTests
     [TestMethod]
     public void TryGetValue_WithExistingKey_ReturnsTrueAndValue()
     {
-        var result = Json.CreateObjectBuilder()
+        var result = new JsonObjectBuilder()
             .Add("count", 42)
             .Build().TryGetValue("count", out var value);
         Assert.IsTrue(result);

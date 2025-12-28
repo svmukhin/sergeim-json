@@ -11,7 +11,7 @@ public class ReplaceOperationTests
     [TestMethod]
     public void Replace_Property_ReplacesValue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Build();
         var result = (JsonObject)new JsonPatch(JsonPatchOperation.Replace("/x", new JsonNumber(20))).Apply(obj);
@@ -21,7 +21,7 @@ public class ReplaceOperationTests
     [TestMethod]
     public void Replace_ArrayElement_ReplacesElement()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add(1)
             .Add(2)
             .Add(3)
@@ -34,8 +34,8 @@ public class ReplaceOperationTests
     [TestMethod]
     public void Replace_NestedProperty_ReplacesValue()
     {
-        var obj = Json.CreateObjectBuilder()
-            .Add("data", Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
+            .Add("data", new JsonObjectBuilder()
                 .Add("value", 10))
             .Build();
         var result = (JsonObject)new JsonPatch(JsonPatchOperation.Replace("/data/value", new JsonNumber(20))).Apply(obj);
@@ -47,7 +47,7 @@ public class ReplaceOperationTests
     [ExpectedException(typeof(JsonException))]
     public void Replace_NonExistentProperty_ThrowsJsonException()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 1)
             .Build();
         var patch = new JsonPatch(JsonPatchOperation.Replace("/missing", new JsonNumber(10)));

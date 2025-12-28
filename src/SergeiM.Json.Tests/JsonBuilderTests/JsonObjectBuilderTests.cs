@@ -9,7 +9,7 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Build_EmptyBuilder_CreatesEmptyObject()
     {
-        var obj = Json.CreateObjectBuilder().Build();
+        var obj = new JsonObjectBuilder().Build();
         Assert.AreEqual(0, obj.Count);
         Assert.AreEqual(JsonValueType.Object, obj.ValueType);
     }
@@ -17,7 +17,7 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Add_WithString_AddsStringValue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("name", "Alice")
             .Build();
         Assert.AreEqual("Alice", obj.GetString("name"));
@@ -26,7 +26,7 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Add_WithInt_AddsNumberValue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("age", 30)
             .Build();
         Assert.AreEqual(30, obj.GetInt("age"));
@@ -35,7 +35,7 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Add_WithLong_AddsNumberValue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("big", 9999999999L)
             .Build();
         Assert.AreEqual(9999999999L, obj.GetLong("big"));
@@ -44,7 +44,7 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Add_WithDouble_AddsNumberValue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("pi", 3.14)
             .Build();
         Assert.AreEqual(3.14, obj.GetDouble("pi"), 0.001);
@@ -53,7 +53,7 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Add_WithDecimal_AddsNumberValue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("price", 19.99m)
             .Build();
         Assert.AreEqual(19.99m, ((JsonNumber)obj["price"]).DecimalValue());
@@ -62,7 +62,7 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Add_WithBoolean_AddsBooleanValue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("active", true)
             .Build();
         Assert.IsTrue(obj.GetBoolean("active"));
@@ -71,7 +71,7 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void AddNull_AddsNullValue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .AddNull("empty")
             .Build();
         Assert.IsTrue(obj.IsNull("empty"));
@@ -80,8 +80,8 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Add_WithJsonObject_AddsObjectValue()
     {
-        var result = Json.CreateObjectBuilder()
-            .Add("nested", Json.CreateObjectBuilder().Add("x", 1).Build())
+        var result = new JsonObjectBuilder()
+            .Add("nested", new JsonObjectBuilder().Add("x", 1).Build())
             .Build().GetJsonObject("nested");
         Assert.IsNotNull(result);
         Assert.AreEqual(1, result!.GetInt("x"));
@@ -90,8 +90,8 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Add_WithJsonArray_AddsArrayValue()
     {
-        var result = Json.CreateObjectBuilder()
-            .Add("items", Json.CreateArrayBuilder().Add(1).Add(2).Build())
+        var result = new JsonObjectBuilder()
+            .Add("items", new JsonArrayBuilder().Add(1).Add(2).Build())
             .Build().GetJsonArray("items");
         Assert.IsNotNull(result);
         Assert.AreEqual(2, result!.Count);
@@ -100,8 +100,8 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Add_WithJsonObjectBuilder_AddsObjectValue()
     {
-        var result = Json.CreateObjectBuilder()
-            .Add("nested", Json.CreateObjectBuilder().Add("y", 2))
+        var result = new JsonObjectBuilder()
+            .Add("nested", new JsonObjectBuilder().Add("y", 2))
             .Build().GetJsonObject("nested");
         Assert.AreEqual(2, result!.GetInt("y"));
     }
@@ -109,8 +109,8 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Add_WithJsonArrayBuilder_AddsArrayValue()
     {
-        var result = Json.CreateObjectBuilder()
-            .Add("items", Json.CreateArrayBuilder().Add(3).Add(4))
+        var result = new JsonObjectBuilder()
+            .Add("items", new JsonArrayBuilder().Add(3).Add(4))
             .Build().GetJsonArray("items");
         Assert.AreEqual(2, result!.Count);
         Assert.AreEqual(3, result.GetInt(0));
@@ -119,7 +119,7 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Add_MultipleProperties_AllAdded()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("a", 1)
             .Add("b", 2)
             .Add("c", 3)
@@ -133,7 +133,7 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Add_DuplicateKey_ReplacesValue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("key", 1)
             .Add("key", 2)
             .Build();
@@ -144,7 +144,7 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Remove_ExistingKey_RemovesProperty()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("a", 1)
             .Add("b", 2)
             .Remove("a")
@@ -157,7 +157,7 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Remove_NonExistingKey_NoEffect()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("a", 1)
             .Remove("missing")
             .Build();
@@ -167,7 +167,7 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void Build_MultipleTimes_CreatesIndependentObjects()
     {
-        var builder = Json.CreateObjectBuilder().Add("x", 1);
+        var builder = new JsonObjectBuilder().Add("x", 1);
         var obj1 = builder.Build();
         builder.Add("y", 2);
         var obj2 = builder.Build();
@@ -178,11 +178,11 @@ public class JsonObjectBuilderTests
     [TestMethod]
     public void CreateObjectBuilder_WithExistingObject_CopiesProperties()
     {
-        var original = Json.CreateObjectBuilder()
+        var original = new JsonObjectBuilder()
             .Add("a", 1)
             .Add("b", 2)
             .Build();
-        var modified = Json.CreateObjectBuilder(original)
+        var modified = new JsonObjectBuilder(original)
             .Add("c", 3)
             .Build();
         Assert.AreEqual(2, original.Count);
@@ -196,6 +196,6 @@ public class JsonObjectBuilderTests
     [ExpectedException(typeof(ArgumentNullException))]
     public void Add_WithNullName_ThrowsArgumentNullException()
     {
-        Json.CreateObjectBuilder().Add(null!, "value");
+        new JsonObjectBuilder().Add(null!, "value");
     }
 }

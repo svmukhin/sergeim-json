@@ -11,14 +11,14 @@ public class ComplexStructureTests
     [TestMethod]
     public void Write_ComplexNestedStructure_WritesCorrectly()
     {
-        var json = Json.CreateObjectBuilder()
-            .Add("person", Json.CreateObjectBuilder()
+        var json = new JsonObjectBuilder()
+            .Add("person", new JsonObjectBuilder()
                 .Add("name", "John")
                 .Add("age", 30)
-                .Add("address", Json.CreateObjectBuilder()
+                .Add("address", new JsonObjectBuilder()
                     .Add("street", "Main St")
                     .Add("city", "New York"))
-                .Add("phones", Json.CreateArrayBuilder()
+                .Add("phones", new JsonArrayBuilder()
                     .Add("555-1234")
                     .Add("555-5678")))
             .Build();
@@ -34,11 +34,11 @@ public class ComplexStructureTests
     [TestMethod]
     public void Write_ArrayOfObjects_WritesCorrectly()
     {
-        var arr = Json.CreateArrayBuilder()
-            .Add(Json.CreateObjectBuilder()
+        var arr = new JsonArrayBuilder()
+            .Add(new JsonObjectBuilder()
                 .Add("id", 1)
                 .Add("name", "Alice"))
-            .Add(Json.CreateObjectBuilder()
+            .Add(new JsonObjectBuilder()
                 .Add("id", 2)
                 .Add("name", "Bob"))
             .Build();

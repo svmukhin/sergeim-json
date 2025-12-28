@@ -9,7 +9,7 @@ public class IndexerTests
     [TestMethod]
     public void Indexer_WithExistingKey_ReturnsValue()
     {
-        var value = Json.CreateObjectBuilder()
+        var value = new JsonObjectBuilder()
             .Add("name", "Alice")
             .Build()["name"];
         Assert.IsNotNull(value);

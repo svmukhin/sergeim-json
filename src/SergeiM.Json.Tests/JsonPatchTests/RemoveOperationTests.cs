@@ -11,7 +11,7 @@ public class RemoveOperationTests
     [TestMethod]
     public void Remove_Property_RemovesProperty()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Add("y", 20)
             .Build();
@@ -23,7 +23,7 @@ public class RemoveOperationTests
     [TestMethod]
     public void Remove_ArrayElement_RemovesElement()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add(1)
             .Add(2)
             .Add(3)
@@ -37,8 +37,8 @@ public class RemoveOperationTests
     [TestMethod]
     public void Remove_NestedProperty_RemovesProperty()
     {
-        var obj = Json.CreateObjectBuilder()
-            .Add("data", Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
+            .Add("data", new JsonObjectBuilder()
                 .Add("x", 1)
                 .Add("y", 2))
             .Build();
@@ -52,7 +52,7 @@ public class RemoveOperationTests
     [ExpectedException(typeof(JsonException))]
     public void Remove_NonExistentProperty_ThrowsJsonException()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 1)
             .Build();
         var patch = new JsonPatch(JsonPatchOperation.Remove("/missing"));

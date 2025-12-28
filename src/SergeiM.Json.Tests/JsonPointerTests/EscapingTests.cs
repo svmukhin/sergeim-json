@@ -11,7 +11,7 @@ public class EscapingTests
     [TestMethod]
     public void GetValue_PropertyWithSlash_HandlesEscaping()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("a/b", "value")
             .Build();
         Assert.AreEqual("value", ((JsonString)new JsonPointer("/a~1b").GetValue(obj)).Value);
@@ -20,7 +20,7 @@ public class EscapingTests
     [TestMethod]
     public void GetValue_PropertyWithTilde_HandlesEscaping()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("a~b", "value")
             .Build();
         Assert.AreEqual("value", ((JsonString)new JsonPointer("/a~0b").GetValue(obj)).Value);
@@ -29,7 +29,7 @@ public class EscapingTests
     [TestMethod]
     public void GetValue_PropertyWithBothEscapes_HandlesEscaping()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("a~/b", "value")
             .Build();
         Assert.AreEqual("value", ((JsonString)new JsonPointer("/a~0~1b").GetValue(obj)).Value);

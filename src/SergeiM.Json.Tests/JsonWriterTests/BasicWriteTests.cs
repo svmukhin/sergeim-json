@@ -13,7 +13,7 @@ public class BasicWriteTests
     {
         using var writer = new StringWriter();
         using var jsonWriter = JsonWriter.Create(writer);
-        jsonWriter.Write(Json.CreateObjectBuilder()
+        jsonWriter.Write(new JsonObjectBuilder()
             .Add("name", "Alice")
             .Add("age", 30)
             .Build());
@@ -27,7 +27,7 @@ public class BasicWriteTests
     {
         using var writer = new StringWriter();
         using var jsonWriter = JsonWriter.Create(writer);
-        jsonWriter.Write(Json.CreateArrayBuilder()
+        jsonWriter.Write(new JsonArrayBuilder()
             .Add(1)
             .Add(2)
             .Add(3)

@@ -9,11 +9,11 @@ public class EqualsAndHashCodeTests
     [TestMethod]
     public void Equals_WithSameContent_ReturnsTrue()
     {
-        var arr1 = Json.CreateArrayBuilder()
+        var arr1 = new JsonArrayBuilder()
             .Add("Alice")
             .Add(25)
             .Build();
-        var arr2 = Json.CreateArrayBuilder()
+        var arr2 = new JsonArrayBuilder()
             .Add("Alice")
             .Add(25)
             .Build();
@@ -24,10 +24,10 @@ public class EqualsAndHashCodeTests
     [TestMethod]
     public void Equals_WithDifferentContent_ReturnsFalse()
     {
-        var arr1 = Json.CreateArrayBuilder()
+        var arr1 = new JsonArrayBuilder()
             .Add("Alice")
             .Build();
-        var arr2 = Json.CreateArrayBuilder()
+        var arr2 = new JsonArrayBuilder()
             .Add("Bob")
             .Build();
         Assert.IsFalse(arr1.Equals(arr2));
@@ -36,10 +36,10 @@ public class EqualsAndHashCodeTests
     [TestMethod]
     public void Equals_WithDifferentLength_ReturnsFalse()
     {
-        var arr1 = Json.CreateArrayBuilder()
+        var arr1 = new JsonArrayBuilder()
             .Add(1)
             .Build();
-        var arr2 = Json.CreateArrayBuilder()
+        var arr2 = new JsonArrayBuilder()
             .Add(1)
             .Add(2)
             .Build();
@@ -55,7 +55,7 @@ public class EqualsAndHashCodeTests
     [TestMethod]
     public void Equals_WithSameInstance_ReturnsTrue()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add(1)
             .Build();
         Assert.IsTrue(arr.Equals(arr));

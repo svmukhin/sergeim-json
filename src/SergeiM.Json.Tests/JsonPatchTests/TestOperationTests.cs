@@ -11,7 +11,7 @@ public class TestOperationTests
     [TestMethod]
     public void Test_MatchingValue_DoesNotThrow()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Build();
         var result = new JsonPatch(JsonPatchOperation.Test("/x", new JsonNumber(10))).Apply(obj);
@@ -22,7 +22,7 @@ public class TestOperationTests
     [ExpectedException(typeof(JsonException))]
     public void Test_NonMatchingValue_ThrowsJsonException()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Build();
         var patch = new JsonPatch(JsonPatchOperation.Test("/x", new JsonNumber(20)));
@@ -32,7 +32,7 @@ public class TestOperationTests
     [TestMethod]
     public void Test_MatchingString_DoesNotThrow()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("name", "Alice")
             .Build();
         var result = new JsonPatch(JsonPatchOperation.Test("/name", new JsonString("Alice"))).Apply(obj);
@@ -43,7 +43,7 @@ public class TestOperationTests
     [ExpectedException(typeof(JsonException))]
     public void Test_NonExistentProperty_ThrowsJsonException()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 1)
             .Build();
         var patch = new JsonPatch(JsonPatchOperation.Test("/missing", (JsonValue)new JsonNumber(10)));
@@ -53,7 +53,7 @@ public class TestOperationTests
     [TestMethod]
     public void Test_MatchingNull_DoesNotThrow()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", JsonValue.Null)
             .Build();
         var result = new JsonPatch(JsonPatchOperation.Test("/x", JsonValue.Null)).Apply(obj);

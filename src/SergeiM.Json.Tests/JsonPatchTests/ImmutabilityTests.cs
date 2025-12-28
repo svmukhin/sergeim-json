@@ -11,7 +11,7 @@ public class ImmutabilityTests
     [TestMethod]
     public void Apply_DoesNotModifyOriginal()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Build();
         var result = new JsonPatch(JsonPatchOperation.Add("/y", new JsonNumber(20))).Apply(obj);
@@ -23,7 +23,7 @@ public class ImmutabilityTests
     [TestMethod]
     public void Apply_MultiplePatches_DoesNotModifyOriginal()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Build();
         var patch1 = new JsonPatch(JsonPatchOperation.Add("/y", new JsonNumber(20)));

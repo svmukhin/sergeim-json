@@ -9,7 +9,7 @@ public class EnumerationTests
     [TestMethod]
     public void GetEnumerator_IteratesAllKeyValuePairs()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", "X")
             .Add("y", "Y")
             .Build();

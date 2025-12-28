@@ -9,7 +9,7 @@ public class KeysAndValuesTests
     [TestMethod]
     public void Keys_ReturnsAllKeys()
     {
-        var keys = Json.CreateObjectBuilder()
+        var keys = new JsonObjectBuilder()
                 .Add("a", 1)
                 .Add("b", 2)
                 .Add("c", 3)
@@ -23,7 +23,7 @@ public class KeysAndValuesTests
     [TestMethod]
     public void Values_ReturnsAllValues()
     {
-        var values = Json.CreateObjectBuilder()
+        var values = new JsonObjectBuilder()
             .Add("a", 1)
             .Add("b", 2)
             .Build().Values.ToList();

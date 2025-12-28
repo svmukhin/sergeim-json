@@ -1,6 +1,8 @@
 // SPDX-FileCopyrightText: Copyright (c) [2025] [Sergei Mukhin]
 // SPDX-License-Identifier: MIT
 
+using SergeiM.Json.Builders;
+
 namespace SergeiM.Json.Patch;
 
 /// <summary>
@@ -36,7 +38,7 @@ public static class JsonMergePatch
         if (patch is not JsonObject patchObj)
             return patch;
         var targetObj = target as JsonObject ?? JsonValue.EmptyJsonObject;
-        var builder = Json.CreateObjectBuilder(targetObj);
+        var builder = new JsonObjectBuilder(targetObj);
         foreach (var property in patchObj)
         {
             var key = property.Key;
@@ -72,7 +74,7 @@ public static class JsonMergePatch
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(target);
-        var builder = Json.CreateObjectBuilder();
+        var builder = new JsonObjectBuilder();
         foreach (var key in source.Keys)
         {
             if (!target.ContainsKey(key))

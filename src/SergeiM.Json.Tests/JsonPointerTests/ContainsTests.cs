@@ -11,7 +11,7 @@ public class ContainsTests
     [TestMethod]
     public void Contains_ExistingProperty_ReturnsTrue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("name", "Alice")
             .Build();
         Assert.IsTrue(new JsonPointer("/name").Contains(obj));
@@ -20,7 +20,7 @@ public class ContainsTests
     [TestMethod]
     public void Contains_NonExistentProperty_ReturnsFalse()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 1)
             .Build();
         Assert.IsFalse(new JsonPointer("/missing").Contains(obj));
@@ -29,7 +29,7 @@ public class ContainsTests
     [TestMethod]
     public void Contains_ValidArrayIndex_ReturnsTrue()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add(1)
             .Add(2)
             .Build();
@@ -39,7 +39,7 @@ public class ContainsTests
     [TestMethod]
     public void Contains_InvalidArrayIndex_ReturnsFalse()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add(1)
             .Build();
         Assert.IsFalse(new JsonPointer("/5").Contains(arr));

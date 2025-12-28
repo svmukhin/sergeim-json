@@ -36,11 +36,11 @@ dotnet add package SergeiM.Json
 using SergeiM.Json;
 
 // Using builder pattern
-var person = Json.CreateObjectBuilder()
+var person = new JsonObjectBuilder()
     .Add("name", "Alice")
     .Add("age", 30)
     .Add("isActive", true)
-    .Add("address", Json.CreateObjectBuilder()
+    .Add("address", new JsonObjectBuilder()
         .Add("city", "New York")
         .Add("zip", "10001"))
     .Build();
@@ -58,7 +58,7 @@ int score = person.GetInt("score", 0);            // 0 (key doesn't exist)
 
 ```csharp
 // Using builder pattern
-var numbers = Json.CreateArrayBuilder()
+var numbers = new JsonArrayBuilder()
     .Add(1)
     .Add(2)
     .Add(3)
@@ -79,33 +79,33 @@ foreach (JsonValue value in numbers)
 
 ```csharp
 // Reading from string
-var reader = Json.CreateReader(new StringReader(jsonString));
+var reader = JsonReader.Create(new StringReader(jsonString));
 JsonValue value = reader.Read();
 JsonObject obj = reader.ReadObject();
 JsonArray arr = reader.ReadArray();
 
 // Reading from stream
 using var fileStream = File.OpenRead("data.json");
-var streamReader = Json.CreateReader(fileStream);
+var streamReader = JsonReader.Create(fileStream);
 var data = streamReader.ReadObject();
 
 // Writing to string
-var writer = Json.CreateWriter(new StringWriter());
+var writer = JsonWriter.Create(new StringWriter());
 writer.Write(person);
 string json = stringWriter.ToString();
 
 // Writing with formatting
 var options = new JsonWriterOptions { IndentOutput = true };
-var prettyWriter = Json.CreateWriter(new StringWriter(), options);
+var prettyWriter = JsonWriter.Create(new StringWriter(), options);
 prettyWriter.WriteObject(person);
 ```
 
 ### JSON Pointer (RFC 6901)
 
 ```csharp
-var doc = Json.CreateObjectBuilder()
-    .Add("users", Json.CreateArrayBuilder()
-        .Add(Json.CreateObjectBuilder()
+var doc = new JsonObjectBuilder()
+    .Add("users", new JsonArrayBuilder()
+        .Add(new JsonObjectBuilder()
             .Add("name", "Alice")
             .Add("email", "alice@example.com")))
     .Build();
@@ -133,7 +133,7 @@ var newPointer = JsonPointer.Empty
 ### JSON Patch (RFC 6902)
 
 ```csharp
-var original = Json.CreateObjectBuilder()
+var original = new JsonObjectBuilder()
     .Add("name", "Alice")
     .Add("age", 30)
     .Build();
@@ -212,7 +212,7 @@ All JSON types are immutable. Operations that appear to modify a JSON structure
 actually return a new instance:
 
 ```csharp
-var original = Json.CreateObjectBuilder()
+var original = new JsonObjectBuilder()
     .Add("x", 10)
     .Build();
 
@@ -241,7 +241,7 @@ int value = obj.GetInt("missing", 0);             // Returns 0
 // Invalid JSON
 try
 {
-    var reader = Json.CreateReader(new StringReader("invalid"));
+    var reader = JsonReader.Create(new StringReader("invalid"));
     var value = reader.Read();                    // Throws JsonException
 }
 catch (JsonException ex) { }

@@ -15,7 +15,7 @@ public class ToStringTests
     [TestMethod]
     public void ToString_WithSimpleValues_ReturnsValidJson()
     {
-        var json = Json.CreateArrayBuilder()
+        var json = new JsonArrayBuilder()
             .Add("Alice")
             .Add(30)
             .Add(true)
@@ -26,8 +26,8 @@ public class ToStringTests
     [TestMethod]
     public void ToString_WithNestedArray_ReturnsValidJson()
     {
-        var json = Json.CreateArrayBuilder()
-            .Add(Json.CreateArrayBuilder()
+        var json = new JsonArrayBuilder()
+            .Add(new JsonArrayBuilder()
                 .Add(1)
                 .Add(2)
                 .Build())
@@ -38,8 +38,8 @@ public class ToStringTests
     [TestMethod]
     public void ToString_WithNestedObject_ReturnsValidJson()
     {
-        var json = Json.CreateArrayBuilder()
-            .Add(Json.CreateObjectBuilder()
+        var json = new JsonArrayBuilder()
+            .Add(new JsonObjectBuilder()
                 .Add("x", 10)
                 .Build())
             .Build().ToString();

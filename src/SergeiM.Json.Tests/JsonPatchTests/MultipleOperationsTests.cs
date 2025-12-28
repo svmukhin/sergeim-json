@@ -11,7 +11,7 @@ public class MultipleOperationsTests
     [TestMethod]
     public void Apply_MultipleOperations_AppliesInOrder()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Build();
         var patch = new JsonPatch(
@@ -28,7 +28,7 @@ public class MultipleOperationsTests
     [TestMethod]
     public void Apply_AddAndRemove_ModifiesCorrectly()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Add("y", 20)
             .Build();
@@ -45,7 +45,7 @@ public class MultipleOperationsTests
     [TestMethod]
     public void Apply_MoveAndAdd_ModifiesCorrectly()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Build();
         var patch = new JsonPatch(
@@ -61,7 +61,7 @@ public class MultipleOperationsTests
     [ExpectedException(typeof(JsonException))]
     public void Apply_TestFailsInMiddle_ThrowsException()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Build();
         var patch = new JsonPatch(

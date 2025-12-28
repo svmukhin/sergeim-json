@@ -11,12 +11,12 @@ public class ComplexStructureTests
     [TestMethod]
     public void Apply_ComplexNestedStructure_ModifiesCorrectly()
     {
-        var obj = Json.CreateObjectBuilder()
-            .Add("users", Json.CreateArrayBuilder()
-                .Add(Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
+            .Add("users", new JsonArrayBuilder()
+                .Add(new JsonObjectBuilder()
                     .Add("name", "Alice")
                     .Add("age", 30))
-                .Add(Json.CreateObjectBuilder()
+                .Add(new JsonObjectBuilder()
                     .Add("name", "Bob")
                     .Add("age", 25)))
             .Build();
@@ -33,9 +33,9 @@ public class ComplexStructureTests
     [TestMethod]
     public void Apply_ArrayWithinObject_ModifiesCorrectly()
     {
-        var obj = Json.CreateObjectBuilder()
-            .Add("data", Json.CreateObjectBuilder()
-                .Add("items", Json.CreateArrayBuilder()
+        var obj = new JsonObjectBuilder()
+            .Add("data", new JsonObjectBuilder()
+                .Add("items", new JsonArrayBuilder()
                     .Add(1)
                     .Add(2)
                     .Add(3)))

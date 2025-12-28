@@ -16,7 +16,7 @@ public class BuilderTests
     [TestMethod]
     public void Builder_WithValues_ContainsValues()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("name", "John")
             .Add("age", 30)
             .Add("active", true)
@@ -30,7 +30,7 @@ public class BuilderTests
     [TestMethod]
     public void Builder_Immutable_DoesNotAffectOriginal()
     {
-        var builder = Json.CreateObjectBuilder().Add("x", 1);
+        var builder = new JsonObjectBuilder().Add("x", 1);
         var obj1 = builder.Build();
         builder.Add("y", 2);
         var obj2 = builder.Build();

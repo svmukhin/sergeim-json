@@ -11,7 +11,7 @@ public class TryGetValueTests
     [TestMethod]
     public void TryGetValue_ExistingProperty_ReturnsTrue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("value", 42)
             .Build();
         var success = new JsonPointer("/value").TryGetValue(obj, out var result);
@@ -23,7 +23,7 @@ public class TryGetValueTests
     [TestMethod]
     public void TryGetValue_NonExistentProperty_ReturnsFalse()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 1)
             .Build();
         var success = new JsonPointer("/missing").TryGetValue(obj, out var result);
@@ -34,7 +34,7 @@ public class TryGetValueTests
     [TestMethod]
     public void TryGetValue_InvalidArrayIndex_ReturnsFalse()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add(1)
             .Build();
         var success = new JsonPointer("/10").TryGetValue(arr, out var result);

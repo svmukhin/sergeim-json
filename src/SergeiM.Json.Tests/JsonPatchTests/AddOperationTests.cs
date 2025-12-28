@@ -11,7 +11,7 @@ public class AddOperationTests
     [TestMethod]
     public void Add_PropertyToObject_AddsProperty()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Build();
         var result = (JsonObject)new JsonPatch(JsonPatchOperation.Add("/y", new JsonNumber(20))).Apply(obj);
@@ -22,8 +22,8 @@ public class AddOperationTests
     [TestMethod]
     public void Add_ToNestedObject_AddsProperty()
     {
-        var obj = Json.CreateObjectBuilder()
-            .Add("data", Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
+            .Add("data", new JsonObjectBuilder()
                 .Add("x", 1))
             .Build();
         var data = ((JsonObject)new JsonPatch(JsonPatchOperation.Add("/data/y", new JsonNumber(2))).Apply(obj)).GetJsonObject("data")!;
@@ -34,7 +34,7 @@ public class AddOperationTests
     [TestMethod]
     public void Add_ElementToArray_InsertsElement()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add(1)
             .Add(2)
             .Add(4)
@@ -50,7 +50,7 @@ public class AddOperationTests
     [TestMethod]
     public void Add_ToEndOfArray_AppendsElement()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add(1)
             .Add(2)
             .Build();
@@ -62,7 +62,7 @@ public class AddOperationTests
     [TestMethod]
     public void Add_RootValue_ReplacesRoot()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 1)
             .Build();
         var result = new JsonPatch(JsonPatchOperation.Add("", new JsonString("new"))).Apply(obj);
@@ -72,7 +72,7 @@ public class AddOperationTests
     [TestMethod]
     public void Add_ExistingProperty_ReplacesValue()
     {
-        var obj = Json.CreateObjectBuilder()
+        var obj = new JsonObjectBuilder()
             .Add("x", 10)
             .Build();
         var result = (JsonObject)new JsonPatch(JsonPatchOperation.Add("/x", new JsonNumber(20))).Apply(obj);

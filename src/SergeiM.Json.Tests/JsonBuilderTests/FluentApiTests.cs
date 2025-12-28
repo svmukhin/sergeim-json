@@ -9,13 +9,13 @@ public class FluentApiTests
     [TestMethod]
     public void ComplexNestedStructure_BuildsCorrectly()
     {
-        var json = Json.CreateObjectBuilder()
+        var json = new JsonObjectBuilder()
             .Add("name", "John")
             .Add("age", 30)
-            .Add("address", Json.CreateObjectBuilder()
+            .Add("address", new JsonObjectBuilder()
                 .Add("street", "Main St")
                 .Add("city", "New York"))
-            .Add("phones", Json.CreateArrayBuilder()
+            .Add("phones", new JsonArrayBuilder()
                 .Add("555-1234")
                 .Add("555-5678"))
             .Build();
@@ -33,10 +33,10 @@ public class FluentApiTests
     [TestMethod]
     public void DeepNesting_BuildsCorrectly()
     {
-        var json = Json.CreateObjectBuilder()
-            .Add("level1", Json.CreateObjectBuilder()
-                .Add("level2", Json.CreateObjectBuilder()
-                    .Add("level3", Json.CreateObjectBuilder()
+        var json = new JsonObjectBuilder()
+            .Add("level1", new JsonObjectBuilder()
+                .Add("level2", new JsonObjectBuilder()
+                    .Add("level3", new JsonObjectBuilder()
                         .Add("value", 42))))
             .Build();
         var level1 = json.GetJsonObject("level1");
@@ -48,11 +48,11 @@ public class FluentApiTests
     [TestMethod]
     public void ArrayOfObjects_BuildsCorrectly()
     {
-        var json = Json.CreateArrayBuilder()
-            .Add(Json.CreateObjectBuilder()
+        var json = new JsonArrayBuilder()
+            .Add(new JsonObjectBuilder()
                 .Add("id", 1)
                 .Add("name", "Alice"))
-            .Add(Json.CreateObjectBuilder()
+            .Add(new JsonObjectBuilder()
                 .Add("id", 2)
                 .Add("name", "Bob"))
             .Build();

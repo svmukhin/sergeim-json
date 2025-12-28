@@ -11,7 +11,7 @@ public class RoundTripTests
     [TestMethod]
     public void RoundTrip_Object_PreservesData()
     {
-        var original = Json.CreateObjectBuilder()
+        var original = new JsonObjectBuilder()
             .Add("string", "value")
             .Add("number", 42)
             .Add("boolean", true)
@@ -32,7 +32,7 @@ public class RoundTripTests
     [TestMethod]
     public void RoundTrip_Array_PreservesData()
     {
-        var original = Json.CreateArrayBuilder()
+        var original = new JsonArrayBuilder()
             .Add("text")
             .Add(123)
             .Add(false)
@@ -53,9 +53,9 @@ public class RoundTripTests
     [TestMethod]
     public void RoundTrip_ComplexStructure_PreservesData()
     {
-        var original = Json.CreateObjectBuilder()
-            .Add("nested", Json.CreateObjectBuilder()
-                .Add("array", Json.CreateArrayBuilder()
+        var original = new JsonObjectBuilder()
+            .Add("nested", new JsonObjectBuilder()
+                .Add("array", new JsonArrayBuilder()
                     .Add(1)
                     .Add(2)
                     .Add(3)))

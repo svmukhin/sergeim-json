@@ -17,7 +17,7 @@ public class BuilderTests
     [TestMethod]
     public void Builder_WithValues_ContainsValues()
     {
-        var arr = Json.CreateArrayBuilder()
+        var arr = new JsonArrayBuilder()
             .Add("hello")
             .Add(42)
             .Add(true)
@@ -31,7 +31,7 @@ public class BuilderTests
     [TestMethod]
     public void Builder_Immutable_DoesNotAffectOriginal()
     {
-        var builder = Json.CreateArrayBuilder().Add(1);
+        var builder = new JsonArrayBuilder().Add(1);
         var arr1 = builder.Build();
         builder.Add(2);
         var arr2 = builder.Build();

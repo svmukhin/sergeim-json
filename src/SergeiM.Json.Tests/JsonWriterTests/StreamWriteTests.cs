@@ -14,7 +14,7 @@ public class StreamWriteTests
     {
         using var stream = new MemoryStream();
         using var jsonWriter = JsonWriter.Create(stream);
-        jsonWriter.Write(Json.CreateObjectBuilder()
+        jsonWriter.Write(new JsonObjectBuilder()
             .Add("test", 123)
             .Build());
         jsonWriter.Flush();
@@ -27,7 +27,7 @@ public class StreamWriteTests
     {
         using var stream = new MemoryStream();
         using var jsonWriter = JsonWriter.Create(stream);
-        jsonWriter.WriteObject(Json.CreateObjectBuilder()
+        jsonWriter.WriteObject(new JsonObjectBuilder()
             .Add("value", 456)
             .Build());
         jsonWriter.Flush();
@@ -40,7 +40,7 @@ public class StreamWriteTests
     {
         using var stream = new MemoryStream();
         using var jsonWriter = JsonWriter.Create(stream);
-        jsonWriter.WriteArray(Json.CreateArrayBuilder()
+        jsonWriter.WriteArray(new JsonArrayBuilder()
             .Add(7)
             .Add(8)
             .Add(9)

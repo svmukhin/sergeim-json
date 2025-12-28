@@ -9,7 +9,7 @@ public class ContainsKeyTests
     [TestMethod]
     public void ContainsKey_WithExistingKey_ReturnsTrue()
     {
-        Assert.IsTrue(Json.CreateObjectBuilder()
+        Assert.IsTrue(new JsonObjectBuilder()
             .Add("name", "Bob")
             .Build().ContainsKey("name"));
     }
