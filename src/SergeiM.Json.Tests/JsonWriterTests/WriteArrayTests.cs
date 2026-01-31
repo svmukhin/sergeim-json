@@ -1,8 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) [2025-2026] [Sergei Mukhin]
 // SPDX-License-Identifier: MIT
 
-using SergeiM.Json.IO;
-
 namespace SergeiM.Json.Tests.JsonWriterTests;
 
 [TestClass]
@@ -12,7 +10,7 @@ public class WriteArrayTests
     public void WriteArray_EmptyArray_WritesEmptyBrackets()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.WriteArray(JsonArray.Empty);
         var json = writer.ToString();
         Assert.AreEqual("[]", json);
@@ -22,7 +20,7 @@ public class WriteArrayTests
     public void WriteArray_WithElements_WritesAllElements()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.WriteArray(new JsonArrayBuilder()
             .Add(1)
             .Add(2)
@@ -42,7 +40,7 @@ public class WriteArrayTests
                 .Build())
             .Build();
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.WriteArray(arr);
         var json = writer.ToString();
         Assert.AreEqual("[[1,2]]", json);

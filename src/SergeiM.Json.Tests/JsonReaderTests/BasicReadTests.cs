@@ -1,8 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) [2025-2026] [Sergei Mukhin]
 // SPDX-License-Identifier: MIT
 
-using SergeiM.Json.IO;
-
 namespace SergeiM.Json.Tests.JsonReaderTests;
 
 [TestClass]
@@ -11,7 +9,7 @@ public class BasicReadTests
     [TestMethod]
     public void Read_SimpleObject_ReturnsJsonObject()
     {
-        using var reader = JsonReader.Create(new StringReader("{\"name\":\"Alice\",\"age\":30}"));
+        using var reader = new JsonReader(new StringReader("{\"name\":\"Alice\",\"age\":30}"));
         var value = reader.Read();
         Assert.IsNotNull(value);
         Assert.AreEqual(JsonValueType.Object, value.ValueType);
@@ -23,7 +21,7 @@ public class BasicReadTests
     [TestMethod]
     public void Read_SimpleArray_ReturnsJsonArray()
     {
-        using var reader = JsonReader.Create(new StringReader("[1,2,3]"));
+        using var reader = new JsonReader(new StringReader("[1,2,3]"));
         var value = reader.Read();
         Assert.IsNotNull(value);
         Assert.AreEqual(JsonValueType.Array, value.ValueType);
@@ -37,7 +35,7 @@ public class BasicReadTests
     [TestMethod]
     public void Read_String_ReturnsJsonString()
     {
-        using var reader = JsonReader.Create(new StringReader("\"hello\""));
+        using var reader = new JsonReader(new StringReader("\"hello\""));
         var value = reader.Read();
         Assert.IsNotNull(value);
         Assert.AreEqual(JsonValueType.String, value.ValueType);
@@ -47,7 +45,7 @@ public class BasicReadTests
     [TestMethod]
     public void Read_Number_ReturnsJsonNumber()
     {
-        using var reader = JsonReader.Create(new StringReader("42"));
+        using var reader = new JsonReader(new StringReader("42"));
         var value = reader.Read();
         Assert.IsNotNull(value);
         Assert.AreEqual(JsonValueType.Number, value.ValueType);
@@ -57,7 +55,7 @@ public class BasicReadTests
     [TestMethod]
     public void Read_Boolean_ReturnsJsonBoolean()
     {
-        using var reader = JsonReader.Create(new StringReader("true"));
+        using var reader = new JsonReader(new StringReader("true"));
         var value = reader.Read();
         Assert.IsNotNull(value);
         Assert.AreEqual(JsonValueType.Boolean, value.ValueType);
@@ -67,7 +65,7 @@ public class BasicReadTests
     [TestMethod]
     public void Read_Null_ReturnsJsonNull()
     {
-        using var reader = JsonReader.Create(new StringReader("null"));
+        using var reader = new JsonReader(new StringReader("null"));
         var value = reader.Read();
         Assert.IsNotNull(value);
         Assert.AreEqual(JsonValueType.Null, value.ValueType);

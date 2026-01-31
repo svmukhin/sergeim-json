@@ -1,8 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) [2025-2026] [Sergei Mukhin]
 // SPDX-License-Identifier: MIT
 
-using SergeiM.Json.IO;
-
 namespace SergeiM.Json.Tests.JsonReaderTests;
 
 [TestClass]
@@ -22,7 +20,7 @@ public class ComplexStructureTests
                     ""phones"": [""555-1234"", ""555-5678""]
                 }
             }";
-        using var reader = JsonReader.Create(new StringReader(json));
+        using var reader = new JsonReader(new StringReader(json));
         var person = reader.ReadObject().GetJsonObject("person");
         Assert.IsNotNull(person);
         Assert.AreEqual("John", person!.GetString("name"));
@@ -45,7 +43,7 @@ public class ComplexStructureTests
                 {""id"": 1, ""name"": ""Alice""},
                 {""id"": 2, ""name"": ""Bob""}
             ]";
-        using var reader = JsonReader.Create(new StringReader(json));
+        using var reader = new JsonReader(new StringReader(json));
         var arr = reader.ReadArray();
         Assert.AreEqual(2, arr.Count);
         var first = arr.GetJsonObject(0);
