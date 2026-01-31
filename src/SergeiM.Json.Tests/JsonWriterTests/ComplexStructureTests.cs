@@ -1,8 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) [2025-2026] [Sergei Mukhin]
 // SPDX-License-Identifier: MIT
 
-using SergeiM.Json.IO;
-
 namespace SergeiM.Json.Tests.JsonWriterTests;
 
 [TestClass]
@@ -23,7 +21,7 @@ public class ComplexStructureTests
                     .Add("555-5678")))
             .Build();
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(json);
         var result = writer.ToString();
         Assert.IsTrue(result.Contains("\"person\":{"));
@@ -43,7 +41,7 @@ public class ComplexStructureTests
                 .Add("name", "Bob"))
             .Build();
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(arr);
         var result = writer.ToString();
         Assert.IsTrue(result.Contains("{\"id\":1,\"name\":\"Alice\"}") ||

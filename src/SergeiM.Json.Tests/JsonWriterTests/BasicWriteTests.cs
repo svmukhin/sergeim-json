@@ -1,8 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) [2025-2026] [Sergei Mukhin]
 // SPDX-License-Identifier: MIT
 
-using SergeiM.Json.IO;
-
 namespace SergeiM.Json.Tests.JsonWriterTests;
 
 [TestClass]
@@ -12,7 +10,7 @@ public class BasicWriteTests
     public void Write_SimpleObject_WritesCorrectJson()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(new JsonObjectBuilder()
             .Add("name", "Alice")
             .Add("age", 30)
@@ -26,7 +24,7 @@ public class BasicWriteTests
     public void Write_SimpleArray_WritesCorrectJson()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(new JsonArrayBuilder()
             .Add(1)
             .Add(2)
@@ -40,7 +38,7 @@ public class BasicWriteTests
     public void Write_String_WritesQuotedString()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(new JsonString("hello"));
         var json = writer.ToString();
         Assert.AreEqual("\"hello\"", json);
@@ -50,7 +48,7 @@ public class BasicWriteTests
     public void Write_Number_WritesNumber()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(new JsonNumber(42));
         var json = writer.ToString();
         Assert.AreEqual("42", json);
@@ -60,7 +58,7 @@ public class BasicWriteTests
     public void Write_Boolean_WritesBoolean()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(JsonValue.True);
         var json = writer.ToString();
         Assert.AreEqual("true", json);
@@ -70,7 +68,7 @@ public class BasicWriteTests
     public void Write_Null_WritesNull()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(JsonValue.Null);
         var json = writer.ToString();
         Assert.AreEqual("null", json);
@@ -80,7 +78,7 @@ public class BasicWriteTests
     public void Write_CyrillicString_WritesCorrectJson()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer, JsonWriterOptions.UnicodeUnescaped);
+        using var jsonWriter = new JsonWriter(writer, JsonWriterOptions.UnicodeUnescaped);
         jsonWriter.Write(new JsonString("Привет"));
         var json = writer.ToString();
         Assert.AreEqual("\"Привет\"", json);
@@ -90,7 +88,7 @@ public class BasicWriteTests
     public void Write_CyrillicString_DefaultEncoder_EscapesUnicode()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(new JsonString("Привет"));
         var json = writer.ToString();
         Assert.AreEqual("\"\\u041F\\u0440\\u0438\\u0432\\u0435\\u0442\"", json);

@@ -44,7 +44,7 @@ public static class JsonValueExtensions
         ArgumentNullException.ThrowIfNull(value);
         using var writer = new StringWriter();
         var options = indented ? JsonWriterOptions.PrettyPrint : JsonWriterOptions.Default;
-        using (var jsonWriter = JsonWriter.Create(writer, options))
+        using (var jsonWriter = new JsonWriter(writer, options))
         {
             jsonWriter.Write(value);
         }

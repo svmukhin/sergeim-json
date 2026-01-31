@@ -17,16 +17,13 @@ public sealed class JsonReader : IDisposable
     private readonly JsonReaderOptions _options;
     private bool _disposed;
 
-    private JsonReader(Stream stream, JsonReaderOptions options)
+    /// <summary>
+    /// Creates a JSON reader from a stream with default options.
+    /// </summary>
+    /// <param name="stream">The stream to read from.</param>
+    public JsonReader(Stream stream)
+        : this(stream, JsonReaderOptions.Default)
     {
-        _stream = stream ?? throw new ArgumentNullException(nameof(stream));
-        _options = options ?? JsonReaderOptions.Default;
-    }
-
-    private JsonReader(TextReader textReader, JsonReaderOptions options)
-    {
-        _textReader = textReader ?? throw new ArgumentNullException(nameof(textReader));
-        _options = options ?? JsonReaderOptions.Default;
     }
 
     /// <summary>
@@ -35,9 +32,19 @@ public sealed class JsonReader : IDisposable
     /// <param name="stream">The stream to read from.</param>
     /// <param name="options">Reader options. If null, default options are used.</param>
     /// <returns>A new JSON reader.</returns>
-    public static JsonReader Create(Stream stream, JsonReaderOptions? options = null)
+    public JsonReader(Stream stream, JsonReaderOptions options)
     {
-        return new JsonReader(stream, options ?? JsonReaderOptions.Default);
+        _stream = stream ?? throw new ArgumentNullException(nameof(stream));
+        _options = options ?? JsonReaderOptions.Default;
+    }
+
+    /// <summary>
+    /// Creates a JSON reader from a TextReader with default options.
+    /// </summary>
+    /// <param name="textReader">The text reader to read from.</param>
+    public JsonReader(TextReader textReader)
+        : this(textReader, JsonReaderOptions.Default)
+    {
     }
 
     /// <summary>
@@ -46,9 +53,10 @@ public sealed class JsonReader : IDisposable
     /// <param name="textReader">The text reader to read from.</param>
     /// <param name="options">Reader options. If null, default options are used.</param>
     /// <returns>A new JSON reader.</returns>
-    public static JsonReader Create(TextReader textReader, JsonReaderOptions? options = null)
+    public JsonReader(TextReader textReader, JsonReaderOptions options)
     {
-        return new JsonReader(textReader, options ?? JsonReaderOptions.Default);
+        _textReader = textReader ?? throw new ArgumentNullException(nameof(textReader));
+        _options = options ?? JsonReaderOptions.Default;
     }
 
     /// <summary>

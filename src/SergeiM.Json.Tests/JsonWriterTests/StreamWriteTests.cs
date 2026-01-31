@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: MIT
 
 using System.Text;
-using SergeiM.Json.IO;
 
 namespace SergeiM.Json.Tests.JsonWriterTests;
 
@@ -13,7 +12,7 @@ public class StreamWriteTests
     public void Write_ToStream_WritesCorrectBytes()
     {
         using var stream = new MemoryStream();
-        using var jsonWriter = JsonWriter.Create(stream);
+        using var jsonWriter = new JsonWriter(stream);
         jsonWriter.Write(new JsonObjectBuilder()
             .Add("test", 123)
             .Build());
@@ -26,7 +25,7 @@ public class StreamWriteTests
     public void WriteObject_ToStream_WritesCorrectBytes()
     {
         using var stream = new MemoryStream();
-        using var jsonWriter = JsonWriter.Create(stream);
+        using var jsonWriter = new JsonWriter(stream);
         jsonWriter.WriteObject(new JsonObjectBuilder()
             .Add("value", 456)
             .Build());
@@ -39,7 +38,7 @@ public class StreamWriteTests
     public void WriteArray_ToStream_WritesCorrectBytes()
     {
         using var stream = new MemoryStream();
-        using var jsonWriter = JsonWriter.Create(stream);
+        using var jsonWriter = new JsonWriter(stream);
         jsonWriter.WriteArray(new JsonArrayBuilder()
             .Add(7)
             .Add(8)

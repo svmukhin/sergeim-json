@@ -1,8 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) [2025-2026] [Sergei Mukhin]
 // SPDX-License-Identifier: MIT
 
-using SergeiM.Json.IO;
-
 namespace SergeiM.Json.Tests.JsonWriterTests;
 
 [TestClass]
@@ -12,7 +10,7 @@ public class WriteObjectTests
     public void WriteObject_EmptyObject_WritesEmptyBraces()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.WriteObject(JsonObject.Empty);
         var json = writer.ToString();
         Assert.AreEqual("{}", json);
@@ -22,7 +20,7 @@ public class WriteObjectTests
     public void WriteObject_WithProperties_WritesAllProperties()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.WriteObject(new JsonObjectBuilder()
             .Add("x", 10)
             .Add("y", 20)
@@ -41,7 +39,7 @@ public class WriteObjectTests
                 .Build())
             .Build();
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.WriteObject(obj);
         var json = writer.ToString();
         Assert.IsTrue(json.Contains("\"outer\":{\"inner\":\"value\"}"));

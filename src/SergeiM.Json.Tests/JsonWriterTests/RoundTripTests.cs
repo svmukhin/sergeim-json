@@ -1,8 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) [2025-2026] [Sergei Mukhin]
 // SPDX-License-Identifier: MIT
 
-using SergeiM.Json.IO;
-
 namespace SergeiM.Json.Tests.JsonWriterTests;
 
 [TestClass]
@@ -18,10 +16,10 @@ public class RoundTripTests
             .AddNull("null")
             .Build();
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(original);
         var json = writer.ToString();
-        using var reader = JsonReader.Create(new StringReader(json));
+        using var reader = new JsonReader(new StringReader(json));
         var parsed = reader.ReadObject();
         Assert.AreEqual("value", parsed.GetString("string"));
         Assert.AreEqual(42, parsed.GetInt("number"));
@@ -39,10 +37,10 @@ public class RoundTripTests
             .AddNull()
             .Build();
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(original);
         var json = writer.ToString();
-        using var reader = JsonReader.Create(new StringReader(json));
+        using var reader = new JsonReader(new StringReader(json));
         var parsed = reader.ReadArray();
         Assert.AreEqual("text", parsed.GetString(0));
         Assert.AreEqual(123, parsed.GetInt(1));
@@ -61,10 +59,10 @@ public class RoundTripTests
                     .Add(3)))
             .Build();
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(original);
         var json = writer.ToString();
-        using var reader = JsonReader.Create(new StringReader(json));
+        using var reader = new JsonReader(new StringReader(json));
         var parsed = reader.ReadObject();
         var nested = parsed.GetJsonObject("nested");
         var array = nested!.GetJsonArray("array");

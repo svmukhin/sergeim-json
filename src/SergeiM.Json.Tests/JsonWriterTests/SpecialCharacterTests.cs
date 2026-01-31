@@ -1,8 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) [2025-2026] [Sergei Mukhin]
 // SPDX-License-Identifier: MIT
 
-using SergeiM.Json.IO;
-
 namespace SergeiM.Json.Tests.JsonWriterTests;
 
 [TestClass]
@@ -13,7 +11,7 @@ public class SpecialCharacterTests
     {
 
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(new JsonString("She said \"hello\""));
         var json = writer.ToString();
         Assert.IsTrue(json.Contains("She said"));
@@ -24,7 +22,7 @@ public class SpecialCharacterTests
     public void Write_StringWithBackslash_EscapesBackslash()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(new JsonString("C:\\path\\to\\file"));
         var json = writer.ToString();
         Assert.IsTrue(json.Contains("\\\\"));
@@ -34,7 +32,7 @@ public class SpecialCharacterTests
     public void Write_StringWithNewline_EscapesNewline()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(new JsonString("Line1\nLine2"));
         var json = writer.ToString();
         Assert.IsTrue(json.Contains("\\n"));
@@ -44,7 +42,7 @@ public class SpecialCharacterTests
     public void Write_EmptyString_WritesEmptyQuotes()
     {
         using var writer = new StringWriter();
-        using var jsonWriter = JsonWriter.Create(writer);
+        using var jsonWriter = new JsonWriter(writer);
         jsonWriter.Write(new JsonString(""));
         var json = writer.ToString();
         Assert.AreEqual("\"\"", json);

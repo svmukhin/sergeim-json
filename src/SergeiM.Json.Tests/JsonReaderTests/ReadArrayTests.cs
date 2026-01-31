@@ -1,8 +1,6 @@
 // SPDX-FileCopyrightText: Copyright (c) [2025-2026] [Sergei Mukhin]
 // SPDX-License-Identifier: MIT
 
-using SergeiM.Json.IO;
-
 namespace SergeiM.Json.Tests.JsonReaderTests;
 
 [TestClass]
@@ -11,7 +9,7 @@ public class ReadArrayTests
     [TestMethod]
     public void ReadArray_ValidArray_ReturnsJsonArray()
     {
-        using var reader = JsonReader.Create(new StringReader("[10,20,30]"));
+        using var reader = new JsonReader(new StringReader("[10,20,30]"));
         var arr = reader.ReadArray();
         Assert.IsNotNull(arr);
         Assert.AreEqual(3, arr.Count);
@@ -23,7 +21,7 @@ public class ReadArrayTests
     [TestMethod]
     public void ReadArray_EmptyArray_ReturnsEmptyJsonArray()
     {
-        using var reader = JsonReader.Create(new StringReader("[]"));
+        using var reader = new JsonReader(new StringReader("[]"));
         var arr = reader.ReadArray();
         Assert.IsNotNull(arr);
         Assert.AreEqual(0, arr.Count);
@@ -32,7 +30,7 @@ public class ReadArrayTests
     [TestMethod]
     public void ReadArray_NestedArray_ReturnsNestedStructure()
     {
-        using var reader = JsonReader.Create(new StringReader("[[1,2],[3,4]]"));
+        using var reader = new JsonReader(new StringReader("[[1,2],[3,4]]"));
         var arr = reader.ReadArray();
         Assert.AreEqual(2, arr.Count);
         var first = arr.GetJsonArray(0);
@@ -44,7 +42,7 @@ public class ReadArrayTests
     [ExpectedException(typeof(JsonException))]
     public void ReadArray_NotAnArray_ThrowsJsonException()
     {
-        using var reader = JsonReader.Create(new StringReader("{\"key\":\"value\"}"));
+        using var reader = new JsonReader(new StringReader("{\"key\":\"value\"}"));
         reader.ReadArray();
     }
 }
