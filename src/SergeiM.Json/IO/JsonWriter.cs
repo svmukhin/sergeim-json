@@ -17,16 +17,13 @@ public sealed class JsonWriter : IDisposable
     private Utf8JsonWriter? _utf8JsonWriter;
     private bool _disposed;
 
-    private JsonWriter(Stream stream, JsonWriterOptions options)
+    /// <summary>
+    /// Creates a JSON writer that writes to a stream with default options.
+    /// </summary>
+    /// <param name="stream">The stream to write to.</param>
+    public JsonWriter(Stream stream)
+        : this(stream, JsonWriterOptions.Default)
     {
-        _stream = stream ?? throw new ArgumentNullException(nameof(stream));
-        _options = options ?? JsonWriterOptions.Default;
-    }
-
-    private JsonWriter(TextWriter textWriter, JsonWriterOptions options)
-    {
-        _textWriter = textWriter ?? throw new ArgumentNullException(nameof(textWriter));
-        _options = options ?? JsonWriterOptions.Default;
     }
 
     /// <summary>
@@ -35,9 +32,19 @@ public sealed class JsonWriter : IDisposable
     /// <param name="stream">The stream to write to.</param>
     /// <param name="options">Writer options. If null, default options are used.</param>
     /// <returns>A new JSON writer.</returns>
-    public static JsonWriter Create(Stream stream, JsonWriterOptions? options = null)
+    public JsonWriter(Stream stream, JsonWriterOptions options)
     {
-        return new JsonWriter(stream, options ?? JsonWriterOptions.Default);
+        _stream = stream ?? throw new ArgumentNullException(nameof(stream));
+        _options = options ?? JsonWriterOptions.Default;
+    }
+
+    /// <summary>
+    /// Creates a JSON writer that writes to a TextWriter with default options.
+    /// </summary>
+    /// <param name="textWriter">The text writer to write to.</param>
+    public JsonWriter(TextWriter textWriter)
+        : this(textWriter, JsonWriterOptions.Default)
+    {
     }
 
     /// <summary>
@@ -46,9 +53,10 @@ public sealed class JsonWriter : IDisposable
     /// <param name="textWriter">The text writer to write to.</param>
     /// <param name="options">Writer options. If null, default options are used.</param>
     /// <returns>A new JSON writer.</returns>
-    public static JsonWriter Create(TextWriter textWriter, JsonWriterOptions? options = null)
+    public JsonWriter(TextWriter textWriter, JsonWriterOptions options)
     {
-        return new JsonWriter(textWriter, options ?? JsonWriterOptions.Default);
+        _textWriter = textWriter ?? throw new ArgumentNullException(nameof(textWriter));
+        _options = options ?? JsonWriterOptions.Default;
     }
 
     /// <summary>
