@@ -79,32 +79,32 @@ foreach (JsonValue value in numbers)
 
 ```csharp
 // Reading from string
-var reader = JsonReader.Create(new StringReader(jsonString));
+var reader = new JsonReader(new StringReader(jsonString));
 JsonValue value = reader.Read();
 JsonObject obj = reader.ReadObject();
 JsonArray arr = reader.ReadArray();
 
 // Reading from stream
 using var fileStream = File.OpenRead("data.json");
-var streamReader = JsonReader.Create(fileStream);
+var streamReader = new JsonReader(new StreamReader(fileStream));
 var data = streamReader.ReadObject();
 
 // Writing to string
-var writer = JsonWriter.Create(new StringWriter());
+var writer = new JsonWriter(new StringWriter());
 writer.Write(person);
 string json = stringWriter.ToString();
 
 // Writing with formatting
 var options = new JsonWriterOptions { IndentOutput = true };
-var prettyWriter = JsonWriter.Create(new StringWriter(), options);
+var prettyWriter = new JsonWriter(new StringWriter(), options);
 prettyWriter.WriteObject(person);
 
 // Writing Unicode characters without escaping (Cyrillic, Chinese, etc.)
-var unicodeWriter = JsonWriter.Create(new StringWriter(), JsonWriterOptions.UnicodeUnescaped);
+var unicodeWriter = new JsonWriter(new StringWriter(), JsonWriterOptions.UnicodeUnescaped);
 unicodeWriter.Write(new JsonString("Привет мир")); // Writes: "Привет мир" (not "\u041F...")
 
 // Pretty print with Unicode
-var prettyUnicode = JsonWriter.Create(new StringWriter(), JsonWriterOptions.PrettyPrintUnicodeUnescaped);
+var prettyUnicode = new JsonWriter(new StringWriter(), JsonWriterOptions.PrettyPrintUnicodeUnescaped);
 ```
 
 ### JSON Pointer (RFC 6901)
