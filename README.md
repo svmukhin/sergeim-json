@@ -52,6 +52,22 @@ bool active = person.GetBoolean("isActive");      // true
 
 // With defaults for missing keys
 int score = person.GetInt("score", 0);            // 0 (key doesn't exist)
+
+// Iteration — JsonObject implements IReadOnlyDictionary<string, JsonValue>
+foreach (var (key, value) in person)
+{
+    Console.WriteLine($"{key}: {value}");
+}
+
+// Keys and values separately
+foreach (string key in person.Keys) { ... }
+foreach (JsonValue value in person.Values) { ... }
+
+// Safe lookup for unknown keys
+if (person.TryGetValue("nickname", out var nickname))
+{
+    Console.WriteLine(nickname);
+}
 ```
 
 ### Creating JSON Arrays
