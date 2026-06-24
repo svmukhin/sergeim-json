@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.2](https://github.com/svmukhin/sergeim-json/compare/v0.2.1...v0.2.2) (2026-06-24)
+
+
+### Miscellaneous
+
+* **#8:** fix version prefix in PackageReleaseNotes link ([dd1dafe](https://github.com/svmukhin/sergeim-json/commit/dd1dafebd99eeb17c253401f080b83224bb72ead))
+
 ## [0.2.1](https://github.com/svmukhin/sergeim-json/compare/0.2.0...v0.2.1) (2026-06-24)
 
 
